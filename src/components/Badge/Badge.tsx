@@ -19,8 +19,8 @@ const NotificationBadge: React.FC<Props> = ({ children }) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const { useFeedStore } = useFeedProviderState();
-  const unreadCount = useFeedStore(
-    (state: StoreState) => state.metadata.unread_count
+  const unseenCount = useFeedStore(
+    (state: StoreState) => state.metadata.unseen_count
   );
 
   const { styles, attributes } = usePopper(
@@ -69,9 +69,9 @@ const NotificationBadge: React.FC<Props> = ({ children }) => {
         ref={buttonRef}
       >
         <BellIcon />
-        {unreadCount !== 0 && (
+        {unseenCount !== 0 && (
           <UnreadBadge>
-            <UnreadCount>{formatBadgeCount(unreadCount)}</UnreadCount>
+            <UnreadCount>{formatBadgeCount(unseenCount)}</UnreadCount>
           </UnreadBadge>
         )}
       </NotificationButton>

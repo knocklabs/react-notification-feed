@@ -26,17 +26,21 @@ export const MarkAllAsRead = styled.button`
 
 const MarkAsRead = () => {
   const { useFeedStore, feedClient } = useFeedProviderState();
+
+  const unreadItems = useFeedStore((state: StoreState) =>
+    state.items.filter((item) => !item.read_at)
+  );
+
   const unreadCount = useFeedStore(
     (state: StoreState) => state.metadata.unread_count
   );
 
   const onClick = React.useCallback(() => {
-    // This should do an optimistic update
-    // feedClient.markAllAsRead();
+    feedClient.markAsRead(unreadItems);
   }, []);
 
   return (
-    <MarkAllAsRead disabled={unreadCount.length === 0} onClick={onClick}>
+    <MarkAllAsRead disabled={unreadCount === 0} onClick={onClick}>
       Mark all as read
       <CheckmarkCircle />
     </MarkAllAsRead>

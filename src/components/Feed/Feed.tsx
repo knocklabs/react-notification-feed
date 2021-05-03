@@ -1,5 +1,5 @@
 import { FeedItem } from "@knocklabs/client";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import EmptyFeed from "../EmptyFeed/EmptyFeed";
 import { useFeedProviderState } from "../FeedProvider/FeedProvider";
 import Spinner from "../Spinner";
@@ -26,9 +26,23 @@ const Feed: React.FC<Props> = ({
   EmptyComponent = <EmptyFeed />,
   renderItem = defaultRenderItem,
 }) => {
-  const { status, setStatus, useFeedStore } = useFeedProviderState();
+  const {
+    status,
+    setStatus,
+    feedClient,
+    useFeedStore,
+  } = useFeedProviderState();
   const { items, loading } = useFeedStore();
   const noItems = items.length === 0;
+
+  useEffect(() => {
+    // Mark everything as seen on load
+    const unseenItems = items.filter((item: FeedItem) => !item.seen_at);
+
+    if (unseenItems.length > 0) {
+      feedClient.markAsSeen(items);
+    }
+  }, []);
 
   return (
     <>
