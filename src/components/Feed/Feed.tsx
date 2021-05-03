@@ -56,7 +56,7 @@ const Feed: React.FC<Props> = ({
       )}
 
       {!loading && items.map((item: FeedItem) => renderItem({ item }))}
-      {!loading && noItems && { EmptyComponent }}
+      {!loading && noItems && EmptyComponent}
     </>
   );
 };

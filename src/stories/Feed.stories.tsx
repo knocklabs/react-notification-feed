@@ -14,13 +14,13 @@ type Props = {};
 
 // Add some test creds in here
 const knockClient = new Knock(
-  "pk_test_xPDiT9f2gIfbVRYSwTJ3CqTZ_GUeXzdTpOV86Z3nNDs",
+  "pk_test_jBWWavJ2eo9hptbJ6Ramb-FfEvH6SSwejg2GbsqcW9A",
   {
-    host: "http://localhost:4001",
+    host: "https://api.knock-dev.app",
   }
 );
 
-knockClient.authenticate("chris");
+knockClient.authenticate("samtest1");
 
 const Template: Story<Props> = (args) => {
   return (
@@ -28,7 +28,7 @@ const Template: Story<Props> = (args) => {
       {knockClient && (
         <FeedProvider
           knockClient={knockClient}
-          feedId={"97e0f24a-35c6-45e5-b69f-58b88e3004de"}
+          feedId={"2b3fe2a4-4d97-4483-a86c-ede25a137c32"}
         >
           <PopoverBadge>{({ onClose }) => <Feed />}</PopoverBadge>
         </FeedProvider>
