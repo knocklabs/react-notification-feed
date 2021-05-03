@@ -19,7 +19,7 @@ type Props = {
 };
 
 const defaultRenderItem = ({ item }: RenderItemProps) => (
-  <MessageCell item={item} />
+  <MessageCell key={item.id} item={item} />
 );
 
 const Feed: React.FC<Props> = ({
