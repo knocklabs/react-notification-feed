@@ -35,6 +35,10 @@ const FeedProvider: React.FC<Props> = ({ knockClient, feedId, children }) => {
   }, [knockClient, feedId]);
 
   React.useEffect(() => {
+    feedClient.listenForUpdates();
+  }, [feedClient]);
+
+  React.useEffect(() => {
     feedClient.fetch({ status });
   }, [feedClient, status]);
 
