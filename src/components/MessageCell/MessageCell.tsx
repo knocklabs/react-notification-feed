@@ -27,8 +27,8 @@ const MessageCell: React.FC<Props> = ({ item, onItemClick }) => {
   const actionUrl = blocksByName.action_url && blocksByName.action_url.rendered;
 
   const onClick = React.useCallback(() => {
-    // Mark as read
-    // feedClient.markAsRead(item);
+    // Mark as read once we click the item
+    feedClient.markAsRead(item);
 
     if (onItemClick) {
       onItemClick(item);
