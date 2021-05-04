@@ -5,9 +5,15 @@ export function formatBadgeCount(count: number): string | number {
 }
 
 export function formatTimestamp(ts: string) {
-  const formatted = formatRelative(parseISO(ts), new Date());
+  try {
+    const parsedTs = parseISO(ts);
+    const formatted = formatRelative(parsedTs, new Date());
+    return toSentenceCase(formatted);
+  } catch (e) {
+    return ts;
+  }
+}
 
-  console.log(formatted);
-
-  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+export function toSentenceCase(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
