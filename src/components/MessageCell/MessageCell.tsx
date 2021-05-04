@@ -53,11 +53,7 @@ const MessageCell: React.FC<Props> = ({ item, onItemClick }) => {
             />
           )}
 
-          <Timestamp>
-            {blocksByName.timestamp
-              ? toSentenceCase(blocksByName.timestamp.rendered)
-              : formatTimestamp(item.inserted_at)}
-          </Timestamp>
+          <Timestamp>{formatTimestamp(item.inserted_at)}</Timestamp>
         </Content>
       </InnerContainer>
     </Container>
