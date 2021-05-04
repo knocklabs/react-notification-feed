@@ -14,7 +14,7 @@ type Props = {};
 
 // Add some test creds in here
 const knockClient = new Knock(
-  "sk_1cAVRDeiNrs4MgQ0bMX7d3reyBj0A32Wgw4KM_jo7uc",
+  "pk_SagbQD2n8Lor4Fber2OOr_1BfNGMwqquhHS3Qb2Ki8o",
   {
     host: "https://api.knock-dev.app",
   }
