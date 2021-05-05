@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import { Knock } from "@knocklabs/client/dist";
+import Knock from "@knocklabs/client";
 import { FeedProvider } from "../components/FeedProvider";
 import Feed from "../components/Feed";
 import PopoverBadge from "../components/Badge";

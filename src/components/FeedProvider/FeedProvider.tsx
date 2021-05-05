@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Knock } from "@knocklabs/client";
+import Knock from "@knocklabs/client";
 import create from "zustand";
 import { FilterStatus } from "../../constants";
 import styled from "@emotion/styled";
@@ -11,8 +11,6 @@ type Props = {
   knockClient: Knock;
   feedId: string;
 };
-
-type ProviderState = {};
 
 const Container = styled.div`
   font-family: ${typography.fontFamily}!important;

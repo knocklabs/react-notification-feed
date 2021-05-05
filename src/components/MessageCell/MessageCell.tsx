@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styled from "@emotion/styled";
 import { ContentBlock, FeedItem } from "@knocklabs/client";
 import { spacing, fontSizes, palette } from "../../theme";
-import { formatTimestamp, toSentenceCase } from "../../utils";
+import { formatTimestamp } from "../../utils";
 import Avatar from "./Avatar";
 import { useFeedProviderState } from "../FeedProvider";
 
