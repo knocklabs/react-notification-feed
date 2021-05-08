@@ -1,11 +1,21 @@
 import * as React from "react";
-import Knock from "@knocklabs/client";
-import create from "zustand";
+import Knock, { FeedStoreState } from "@knocklabs/client";
+import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
 import styled from "@emotion/styled";
 import { typography } from "../../theme";
+// TODO: need to fix this import in next version of client
+// import { Feed } from "@knocklabs/client";
 
-const FeedStateContext = React.createContext(null);
+type FeedProviderState = {
+  knockClient: Knock;
+  feedClient: any;
+  useFeedStore: UseStore<FeedStoreState>;
+  status: FilterStatus;
+  setStatus: (status: FilterStatus) => void;
+};
+
+const FeedStateContext = React.createContext<FeedProviderState | null>(null);
 
 type Props = {
   knockClient: Knock;
@@ -55,12 +65,12 @@ const FeedProvider: React.FC<Props> = ({ knockClient, feedId, children }) => {
   );
 };
 
-function useFeedProviderState() {
+function useFeedProviderState(): FeedProviderState {
   const context = React.useContext(FeedStateContext);
   if (context === undefined) {
     throw new Error("useFeedState must be used within a FeedProvider");
   }
-  return context;
+  return context as FeedProviderState;
 }
 
 export { FeedProvider, useFeedProviderState };

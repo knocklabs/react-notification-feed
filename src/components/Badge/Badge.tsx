@@ -6,22 +6,19 @@ import BellIcon from "../Icons/Bell";
 
 import { formatBadgeCount } from "../../utils";
 import { palette, spacing } from "../../theme";
-import { StoreState } from "@knocklabs/client";
 
 type Props = {
   children: ({ onClose }: { onClose: () => void }) => ReactElement;
 };
 
 const NotificationBadge: React.FC<Props> = ({ children }) => {
-  const buttonRef = React.useRef(null);
-  const popperRef = React.useRef(null);
-  const [arrowRef, setArrowRef] = React.useState(null);
+  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+  const popperRef = React.useRef<HTMLDivElement | null>(null);
+  const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const { useFeedStore } = useFeedProviderState();
-  const unseenCount = useFeedStore(
-    (state: StoreState) => state.metadata.unseen_count
-  );
+  const unseenCount = useFeedStore((state) => state.metadata.unseen_count);
 
   const { styles, attributes } = usePopper(
     buttonRef.current,
@@ -41,8 +38,8 @@ const NotificationBadge: React.FC<Props> = ({ children }) => {
   const handleClickOutside = React.useCallback(
     (e) => {
       if (
-        popperRef.current.contains(e.target) ||
-        buttonRef.current.contains(e.target)
+        (popperRef.current && popperRef.current.contains(e.target)) ||
+        (buttonRef.current && buttonRef.current.contains(e.target))
       ) {
         return;
       }

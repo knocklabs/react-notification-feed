@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { StoreState } from "@knocklabs/client";
 import * as React from "react";
 import { palette } from "../../theme";
 import { useFeedProviderState } from "../FeedProvider/FeedProvider";
@@ -27,13 +26,11 @@ export const MarkAllAsRead = styled.button`
 const MarkAsRead = () => {
   const { useFeedStore, feedClient } = useFeedProviderState();
 
-  const unreadItems = useFeedStore((state: StoreState) =>
+  const unreadItems = useFeedStore((state) =>
     state.items.filter((item) => !item.read_at)
   );
 
-  const unreadCount = useFeedStore(
-    (state: StoreState) => state.metadata.unread_count
-  );
+  const unreadCount = useFeedStore((state) => state.metadata.unread_count);
 
   const onClick = React.useCallback(() => {
     feedClient.markAsRead(unreadItems);
