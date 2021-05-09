@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
 import { usePopper } from "react-popper";
-import { useFeedProviderState } from "../FeedProvider";
+import { useKnockFeed } from "../FeedProvider";
 import BellIcon from "../Icons/Bell";
 
 import { formatBadgeCount } from "../../utils";
-import { palette, spacing } from "../../theme";
+import { palette } from "../../theme";
 
 type Props = {
   children: ({ onClose }: { onClose: () => void }) => ReactElement;
@@ -17,13 +17,14 @@ const NotificationBadge: React.FC<Props> = ({ children }) => {
   const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const { useFeedStore } = useFeedProviderState();
+  const { useFeedStore } = useKnockFeed();
   const unseenCount = useFeedStore((state) => state.metadata.unseen_count);
 
   const { styles, attributes } = usePopper(
     buttonRef.current,
     popperRef.current,
     {
+      strategy: "fixed",
       modifiers: [
         {
           name: "arrow",
@@ -88,9 +89,13 @@ const NotificationButton = styled.button`
   background-color: transparent;
   border: none;
   position: relative;
-  padding: ${spacing.xsmall};
-  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+  color: inherit;
 `;
 
 const UnreadBadge = styled.div`
@@ -102,8 +107,8 @@ const UnreadBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 6px;
-  right: 6px;
+  top: 0px;
+  right: 0px;
 `;
 
 const UnreadCount = styled.span`
@@ -118,10 +123,10 @@ const Popover = styled.div`
   height: 400px;
   background-color: ${palette.common.white};
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 `;
 
 const PopoverInner = styled.div`
-  overflow-y: scroll;
   height: 100%;
 `;
 

@@ -4,7 +4,7 @@ import { ContentBlock, FeedItem } from "@knocklabs/client";
 import { spacing, fontSizes, palette } from "../../theme";
 import { formatTimestamp } from "../../utils";
 import Avatar from "./Avatar";
-import { useFeedProviderState } from "../FeedProvider";
+import { useKnockFeed } from "../FeedProvider";
 
 type Props = {
   item: FeedItem;
@@ -16,7 +16,7 @@ type BlockByName = {
 };
 
 const MessageCell: React.FC<Props> = ({ item, onItemClick }) => {
-  const { feedClient } = useFeedProviderState();
+  const { feedClient } = useKnockFeed();
 
   const blocksByName: BlockByName = useMemo(() => {
     return item.blocks.reduce((acc, block) => {
@@ -108,13 +108,14 @@ const BodyContent = styled.div`
     margin-top: 0;
   }
 
-  strong {
-    font-weight: 600;
+  blockquote {
+    border-left: 3px solid ${palette.grey["200"]};
+    padding-left: ${spacing.small};
+    margin: 0;
   }
 
-  blockquote {
-    margin: 0;
-    padding: 0;
+  strong {
+    font-weight: 600;
   }
 `;
 
@@ -122,7 +123,7 @@ const Timestamp = styled.span`
   display: block;
   color: ${palette.grey["200"]};
   font-size: ${fontSizes.small};
-  font-weight: 500;
+  font-weight: 400;
   line-height: 20px;
 `;
 

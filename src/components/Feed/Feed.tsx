@@ -1,11 +1,11 @@
 import { FeedItem } from "@knocklabs/client";
 import React, { ReactElement, useEffect } from "react";
 import EmptyFeed from "../EmptyFeed/EmptyFeed";
-import { useFeedProviderState } from "../FeedProvider/FeedProvider";
+import { useKnockFeed } from "../FeedProvider/FeedProvider";
 import Spinner from "../Spinner";
 import MessageCell from "../MessageCell";
 import MarkAsRead from "./MarkAsRead";
-import { Header, Selector, Type, SpinnerContainer } from "./styles";
+import { Header, Selector, Type, SpinnerContainer, Container } from "./styles";
 import Dropdown from "./Dropdown";
 import { FilterStatus } from "../../constants";
 
@@ -26,12 +26,7 @@ const Feed: React.FC<Props> = ({
   EmptyComponent = <EmptyFeed />,
   renderItem = defaultRenderItem,
 }) => {
-  const {
-    status,
-    setStatus,
-    feedClient,
-    useFeedStore,
-  } = useFeedProviderState();
+  const { status, setStatus, feedClient, useFeedStore } = useKnockFeed();
   const { items, loading } = useFeedStore();
   const noItems = items.length === 0;
 
@@ -59,18 +54,18 @@ const Feed: React.FC<Props> = ({
             )}
           </Dropdown>
         </Selector>
-
         <MarkAsRead />
       </Header>
+      <Container>
+        {loading && (
+          <SpinnerContainer>
+            <Spinner thickness={3} size="16px" />
+          </SpinnerContainer>
+        )}
 
-      {loading && (
-        <SpinnerContainer>
-          <Spinner thickness={3} size="16px" />
-        </SpinnerContainer>
-      )}
-
-      {!loading && items.map((item: FeedItem) => renderItem({ item }))}
-      {!loading && noItems && EmptyComponent}
+        {!loading && items.map((item: FeedItem) => renderItem({ item }))}
+        {!loading && noItems && EmptyComponent}
+      </Container>
     </>
   );
 };

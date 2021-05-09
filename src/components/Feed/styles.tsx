@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { palette } from "../../theme";
+import { fontSizes, palette } from "../../theme";
 
 export const Header = styled.header`
   padding: 12px 16px;
@@ -33,7 +33,7 @@ export const SelectWrapper = styled.div`
 `;
 
 export const Type = styled.span`
-  font-size: 14px;
+  font-size: ${fontSizes.small};
   font-weight: 500;
   color: ${palette.grey["900"]};
   margin-right: 8px;
@@ -65,4 +65,9 @@ export const MarkAllAsRead = styled.button`
   &:disabled {
     color: #dddee1;
   }
+`;
+
+export const Container = styled.div`
+  height: calc(100% - 42px);
+  overflow-y: auto;
 `;

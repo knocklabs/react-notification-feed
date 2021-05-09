@@ -45,7 +45,7 @@ const Initials = styled.span`
 `;
 
 const Image = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 32px;
   height: 32px;
 `;

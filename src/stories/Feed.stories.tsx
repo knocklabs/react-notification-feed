@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Story, Meta } from "@storybook/react";
 import Knock from "@knocklabs/client";
-import { FeedProvider } from "../components/FeedProvider";
-import { KnockProvider, useKnock } from "../components/KnockProvider";
+import { KnockFeedProvider } from "../components/FeedProvider";
 import Feed from "../components/Feed";
 import PopoverBadge from "../components/Badge";
+import { FilterStatus } from "../constants";
 
 export default {
   title: "Feed",
@@ -36,36 +36,19 @@ type Props = {
   apiKey: string;
 };
 
-const FeedInner = ({ userId, feedId }) => {
-  const { client, isAuthed, authenticate } = useKnock();
-
-  useEffect(() => {
-    authenticate(userId);
-
-    return () => client?.teardown();
-  }, [client, userId]);
-
-  if (!client || !isAuthed) {
-    return null;
-  }
-
-  return (
-    <FeedProvider knockClient={client} feedId={feedId}>
-      <PopoverBadge>{({ onClose }) => <Feed />}</PopoverBadge>
-    </FeedProvider>
-  );
-};
-
 const Template: Story<Props> = (args) => {
   return (
-    <KnockProvider
-      apiKey="pk_SagbQD2n8Lor4Fber2OOr_1BfNGMwqquhHS3Qb2Ki8o"
-      options={{ host: args.host }}
+    <KnockFeedProvider
+      apiKey={args.apiKey}
+      userId={args.userId}
+      feedId={args.feedId}
+      clientOptions={{ host: args.host }}
+      initialOptions={{ status: FilterStatus.All }}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <FeedInner {...args} />
+        <PopoverBadge>{({ onClose }) => <Feed />}</PopoverBadge>
       </div>
-    </KnockProvider>
+    </KnockFeedProvider>
   );
 };
 

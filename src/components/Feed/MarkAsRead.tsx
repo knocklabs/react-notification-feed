@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { palette } from "../../theme";
-import { useFeedProviderState } from "../FeedProvider/FeedProvider";
+import { fontSizes, palette } from "../../theme";
+import { useKnockFeed } from "../FeedProvider/FeedProvider";
 import CheckmarkCircle from "../Icons/CheckmarkCircle";
 
 export const MarkAllAsRead = styled.button`
@@ -12,6 +12,7 @@ export const MarkAllAsRead = styled.button`
   align-items: center;
   padding: 0;
   color: ${palette.grey["500"]};
+  font-size: ${fontSizes.small};
   cursor: pointer;
 
   svg {
@@ -20,11 +21,12 @@ export const MarkAllAsRead = styled.button`
 
   &:disabled {
     color: #dddee1;
+    cursor: not-allowed;
   }
 `;
 
 const MarkAsRead = () => {
-  const { useFeedStore, feedClient } = useFeedProviderState();
+  const { useFeedStore, feedClient } = useKnockFeed();
 
   const unreadItems = useFeedStore((state) =>
     state.items.filter((item) => !item.read_at)

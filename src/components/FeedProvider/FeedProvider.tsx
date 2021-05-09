@@ -1,25 +1,35 @@
 import * as React from "react";
-import Knock, { FeedStoreState } from "@knocklabs/client";
+import Knock, {
+  Feed,
+  FeedClientOptions,
+  FeedStoreState,
+  KnockOptions,
+} from "@knocklabs/client";
+import styled from "@emotion/styled";
 import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
-import styled from "@emotion/styled";
 import { typography } from "../../theme";
-// TODO: need to fix this import in next version of client
-// import { Feed } from "@knocklabs/client";
 
-type FeedProviderState = {
-  knockClient: Knock;
-  feedClient: any;
+type KnockFeedProviderState = {
+  knock: Knock;
+  feedClient: Feed;
   useFeedStore: UseStore<FeedStoreState>;
   status: FilterStatus;
   setStatus: (status: FilterStatus) => void;
 };
 
-const FeedStateContext = React.createContext<FeedProviderState | null>(null);
+const FeedStateContext = React.createContext<KnockFeedProviderState | null>(
+  null
+);
 
 type Props = {
-  knockClient: Knock;
+  apiKey: string;
+  userId: string;
+  userToken?: string;
   feedId: string;
+  host?: string;
+  clientOptions?: KnockOptions;
+  initialOptions?: FeedClientOptions;
 };
 
 const Container = styled.div`
@@ -32,18 +42,34 @@ const Container = styled.div`
   }
 `;
 
-const FeedProvider: React.FC<Props> = ({ knockClient, feedId, children }) => {
+const KnockFeedProvider: React.FC<Props> = ({
+  apiKey,
+  userId,
+  feedId,
+  userToken,
+  clientOptions = {},
+  initialOptions = {},
+  children,
+}) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
+  const knock = React.useMemo(() => {
+    const knock = new Knock(apiKey, clientOptions);
+    knock.authenticate(userId, userToken);
+
+    return knock;
+  }, [apiKey, clientOptions, userId, userToken]);
+
   const [feedClient, useFeedStore] = React.useMemo(() => {
-    // Create the notification feed instance
-    const feedClient = knockClient.feeds.initialize(feedId);
+    const feedClient = knock.feeds.initialize(feedId, initialOptions);
     const useFeedStore = create(feedClient.store);
+
     return [feedClient, useFeedStore];
-  }, [knockClient, feedId]);
+  }, [knock, feedId, initialOptions]);
 
   React.useEffect(() => {
     feedClient.listenForUpdates();
+    return () => knock.teardown();
   }, [feedClient]);
 
   React.useEffect(() => {
@@ -51,7 +77,7 @@ const FeedProvider: React.FC<Props> = ({ knockClient, feedId, children }) => {
   }, [feedClient, status]);
 
   const state = {
-    knockClient,
+    knock,
     feedClient,
     useFeedStore,
     status,
@@ -65,12 +91,12 @@ const FeedProvider: React.FC<Props> = ({ knockClient, feedId, children }) => {
   );
 };
 
-function useFeedProviderState(): FeedProviderState {
+function useKnockFeed(): KnockFeedProviderState {
   const context = React.useContext(FeedStateContext);
   if (context === undefined) {
     throw new Error("useFeedState must be used within a FeedProvider");
   }
-  return context as FeedProviderState;
+  return context as KnockFeedProviderState;
 }
 
-export { FeedProvider, useFeedProviderState };
+export { KnockFeedProvider, useKnockFeed };
