@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Story, Meta } from "@storybook/react";
-import Knock from "@knocklabs/client";
 import { KnockFeedProvider } from "../components/FeedProvider";
-import Feed from "../components/Feed";
-import PopoverBadge from "../components/Badge";
+import NotificationButton from "../components/NotificationIconButton";
+import FeedPopover from "../components/FeedPopover";
 import { FilterStatus } from "../constants";
 
 export default {
@@ -37,6 +36,9 @@ type Props = {
 };
 
 const Template: Story<Props> = (args) => {
+  const buttonRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
     <KnockFeedProvider
       apiKey={args.apiKey}
@@ -46,7 +48,15 @@ const Template: Story<Props> = (args) => {
       initialOptions={{ status: FilterStatus.All }}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <PopoverBadge>{({ onClose }) => <Feed />}</PopoverBadge>
+        <NotificationButton
+          ref={buttonRef}
+          onClick={() => setIsVisible(true)}
+        />
+        <FeedPopover
+          buttonRef={buttonRef}
+          isVisible={isVisible}
+          onClose={() => setIsVisible(false)}
+        />
       </div>
     </KnockFeedProvider>
   );

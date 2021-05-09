@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
-import BellIcon from "../Icons/Bell";
 import { fontSizes, palette } from "../../theme";
 
 const EmptyFeed = () => (
   <Container>
     <Inner>
-      <BellIcon />
       <Header>No notifications yet</Header>
       <Body>We'll let you know when we've got something new for you.</Body>
     </Inner>
@@ -18,13 +16,6 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  svg {
-    width: 32px;
-    height: 32px;
-    color: ${palette.grey["300"]};
-    margin-bottom: 8px;
-  }
 `;
 
 const Inner = styled.div`
