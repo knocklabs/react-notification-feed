@@ -5,4 +5,5 @@ export { default as EmptyFeed } from "./components/EmptyFeed";
 export { default as Spinner } from "./components/Spinner";
 
 export * as theme from "./theme";
-export { FeedProvider, useFeedProviderState } from "./components/FeedProvider";
+export * from "./components/FeedProvider";
+export * from "./components/KnockProvider";
