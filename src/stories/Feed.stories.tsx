@@ -49,7 +49,7 @@ const Template: Story<Props> = (args) => {
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <NotificationButton
           ref={buttonRef}
-          onClick={() => setIsVisible(true)}
+          onClick={(e) => setIsVisible(!isVisible)}
         />
         <FeedPopover
           buttonRef={buttonRef}

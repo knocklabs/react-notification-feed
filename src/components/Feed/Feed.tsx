@@ -1,5 +1,5 @@
 import { FeedItem } from "@knocklabs/client";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import EmptyFeed from "../EmptyFeed/EmptyFeed";
 import { useKnockFeed } from "../FeedProvider/FeedProvider";
 import Spinner from "../Spinner";
@@ -11,63 +11,73 @@ import { FilterStatus } from "../../constants";
 
 type RenderItemProps = { item: FeedItem };
 
-type RenderItem = ({ item }: RenderItemProps) => ReactElement;
+type RenderItem = ({ item }: RenderItemProps) => ReactNode;
 
 type Props = {
-  EmptyComponent?: ReactElement;
+  EmptyComponent?: ReactNode;
   renderItem?: RenderItem;
+  isVisible: boolean;
 };
 
 const defaultRenderItem = ({ item }: RenderItemProps) => (
   <MessageCell key={item.id} item={item} />
 );
 
-const Feed: React.FC<Props> = ({
-  EmptyComponent = <EmptyFeed />,
-  renderItem = defaultRenderItem,
-}) => {
-  const { status, setStatus, feedClient, useFeedStore } = useKnockFeed();
-  const { items, loading } = useFeedStore();
-  const noItems = items.length === 0;
+const Feed: React.FC<Props> = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      EmptyComponent = <EmptyFeed />,
+      renderItem = defaultRenderItem,
+      isVisible = false,
+    },
+    ref
+  ) => {
+    const { status, setStatus, feedClient, useFeedStore } = useKnockFeed();
+    const { items, loading } = useFeedStore();
+    const noItems = items.length === 0;
 
-  useEffect(() => {
-    // Mark everything as seen on load
-    const unseenItems = items.filter((item: FeedItem) => !item.seen_at);
+    useEffect(() => {
+      // Mark everything as seen on load
+      const unseenItems = items.filter((item: FeedItem) => !item.seen_at);
 
-    if (unseenItems.length > 0) {
-      feedClient.markAsSeen(items);
-    }
-  }, []);
+      if (unseenItems.length > 0 && isVisible) {
+        feedClient.markAsSeen(items);
+      }
+    }, [isVisible]);
 
-  return (
-    <>
-      <Header>
-        <Selector>
-          <Type>Notifications</Type>
-          <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
-            {[FilterStatus.All, FilterStatus.Unread, FilterStatus.Unseen].map(
-              (state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              )
-            )}
-          </Dropdown>
-        </Selector>
-        <MarkAsRead />
-      </Header>
-      <Container>
-        {loading && (
-          <SpinnerContainer>
-            <Spinner thickness={3} size="16px" />
-          </SpinnerContainer>
-        )}
+    return (
+      <>
+        <Header>
+          <Selector>
+            <Type>Notifications</Type>
+            <Dropdown
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              {[FilterStatus.All, FilterStatus.Unread, FilterStatus.Unseen].map(
+                (state) => (
+                  <option key={state} value={state}>
+                    {state}
+                  </option>
+                )
+              )}
+            </Dropdown>
+          </Selector>
+          <MarkAsRead />
+        </Header>
+        <Container ref={ref}>
+          {loading && (
+            <SpinnerContainer>
+              <Spinner thickness={3} size="16px" />
+            </SpinnerContainer>
+          )}
 
-        {items.map((item: FeedItem) => renderItem({ item }))}
-        {!loading && noItems && EmptyComponent}
-      </Container>
-    </>
-  );
-};
+          {items.map((item: FeedItem) => renderItem({ item }))}
+          {!loading && noItems && EmptyComponent}
+        </Container>
+      </>
+    );
+  }
+);
 
 export default Feed;

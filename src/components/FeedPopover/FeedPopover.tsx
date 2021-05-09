@@ -39,10 +39,7 @@ const FeedPopover: React.FC<Props> = ({ isVisible, onClose, buttonRef }) => {
 
   const handleClickOutside = React.useCallback(
     (e) => {
-      if (
-        (popperRef.current && popperRef.current.contains(e.target)) ||
-        (buttonRef.current && buttonRef.current.contains(e.target))
-      ) {
+      if (popperRef.current && popperRef.current.contains(e.target)) {
         return;
       }
 
@@ -70,7 +67,9 @@ const FeedPopover: React.FC<Props> = ({ isVisible, onClose, buttonRef }) => {
       tabIndex={-1}
     >
       <Arrow ref={setArrowRef} style={styles.arrow} />
-      <PopoverInner>{isVisible && <Feed />}</PopoverInner>
+      <PopoverInner>
+        <Feed isVisible={isVisible} />
+      </PopoverInner>
     </Popover>
   );
 };

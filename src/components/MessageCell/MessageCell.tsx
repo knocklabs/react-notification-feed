@@ -15,50 +15,53 @@ type BlockByName = {
   [name: string]: ContentBlock;
 };
 
-const MessageCell: React.FC<Props> = ({ item, onItemClick }) => {
-  const { feedClient } = useKnockFeed();
+const MessageCell = React.forwardRef<HTMLDivElement, Props>(
+  ({ item, onItemClick }, ref) => {
+    const { feedClient } = useKnockFeed();
 
-  const blocksByName: BlockByName = useMemo(() => {
-    return item.blocks.reduce((acc, block) => {
-      return { ...acc, [block.name]: block };
-    }, {});
-  }, [item]);
+    const blocksByName: BlockByName = useMemo(() => {
+      return item.blocks.reduce((acc, block) => {
+        return { ...acc, [block.name]: block };
+      }, {});
+    }, [item]);
 
-  const actionUrl = blocksByName.action_url && blocksByName.action_url.rendered;
+    const actionUrl =
+      blocksByName.action_url && blocksByName.action_url.rendered;
 
-  const onClick = React.useCallback(() => {
-    // Mark as read once we click the item
-    feedClient.markAsRead(item);
+    const onClick = React.useCallback(() => {
+      // Mark as read once we click the item
+      feedClient.markAsRead(item);
 
-    if (onItemClick) {
-      onItemClick(item);
-    } else {
-      window.location.assign(actionUrl);
-    }
-  }, [item]);
+      if (onItemClick) {
+        onItemClick(item);
+      } else {
+        window.location.assign(actionUrl);
+      }
+    }, [item]);
 
-  const hasActors = item.total_actors > 0;
-  const actor = hasActors && item.actors[0];
+    const hasActors = item.total_actors > 0;
+    const actor = hasActors && item.actors[0];
 
-  return (
-    <Container>
-      <InnerContainer onClick={onClick}>
-        {!item.read_at && <UnreadDot />}
+    return (
+      <Container ref={ref}>
+        <InnerContainer onClick={onClick}>
+          {!item.read_at && <UnreadDot />}
 
-        {actor && <Avatar name={actor.name} src={(actor as any).avatar} />}
-        <Content>
-          {blocksByName.body && (
-            <BodyContent
-              dangerouslySetInnerHTML={{ __html: blocksByName.body.rendered }}
-            />
-          )}
+          {actor && <Avatar name={actor.name} src={(actor as any).avatar} />}
+          <Content>
+            {blocksByName.body && (
+              <BodyContent
+                dangerouslySetInnerHTML={{ __html: blocksByName.body.rendered }}
+              />
+            )}
 
-          <Timestamp>{formatTimestamp(item.inserted_at)}</Timestamp>
-        </Content>
-      </InnerContainer>
-    </Container>
-  );
-};
+            <Timestamp>{formatTimestamp(item.inserted_at)}</Timestamp>
+          </Content>
+        </InnerContainer>
+      </Container>
+    );
+  }
+);
 
 const Container = styled.div`
   position: relative;
@@ -78,8 +81,10 @@ const InnerContainer = styled.button`
   text-align: left;
 
   &:hover,
+  &:focus,
   &:active {
     background-color: #f1f6fc;
+    outline: none;
   }
 `;
 
