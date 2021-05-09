@@ -1,10 +1,5 @@
 import * as React from "react";
-import Knock, {
-  Feed,
-  FeedClientOptions,
-  FeedStoreState,
-  KnockOptions,
-} from "@knocklabs/client";
+import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import styled from "@emotion/styled";
 import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
@@ -28,8 +23,6 @@ type Props = {
   userToken?: string;
   feedId: string;
   host?: string;
-  clientOptions?: KnockOptions;
-  initialOptions?: FeedClientOptions;
 };
 
 const Container = styled.div`
@@ -39,6 +32,7 @@ const Container = styled.div`
 
   * {
     font-family: ${typography.fontFamily}!important;
+    box-sizing: border-box;
   }
 `;
 
@@ -47,25 +41,24 @@ const KnockFeedProvider: React.FC<Props> = ({
   userId,
   feedId,
   userToken,
-  clientOptions = {},
-  initialOptions = {},
+  host,
   children,
 }) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
   const knock = React.useMemo(() => {
-    const knock = new Knock(apiKey, clientOptions);
+    const knock = new Knock(apiKey, { host });
     knock.authenticate(userId, userToken);
 
     return knock;
-  }, [apiKey, clientOptions, userId, userToken]);
+  }, [apiKey, host, userId, userToken]);
 
   const [feedClient, useFeedStore] = React.useMemo(() => {
-    const feedClient = knock.feeds.initialize(feedId, initialOptions);
+    const feedClient = knock.feeds.initialize(feedId);
     const useFeedStore = create(feedClient.store);
 
     return [feedClient, useFeedStore];
-  }, [knock, feedId, initialOptions]);
+  }, [knock, feedId]);
 
   React.useEffect(() => {
     feedClient.listenForUpdates();

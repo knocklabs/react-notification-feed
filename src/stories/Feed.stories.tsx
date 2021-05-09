@@ -44,8 +44,7 @@ const Template: Story<Props> = (args) => {
       apiKey={args.apiKey}
       userId={args.userId}
       feedId={args.feedId}
-      clientOptions={{ host: args.host }}
-      initialOptions={{ status: FilterStatus.All }}
+      host={args.host}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <NotificationButton

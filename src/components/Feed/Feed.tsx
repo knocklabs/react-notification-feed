@@ -63,7 +63,7 @@ const Feed: React.FC<Props> = ({
           </SpinnerContainer>
         )}
 
-        {!loading && items.map((item: FeedItem) => renderItem({ item }))}
+        {items.map((item: FeedItem) => renderItem({ item }))}
         {!loading && noItems && EmptyComponent}
       </Container>
     </>

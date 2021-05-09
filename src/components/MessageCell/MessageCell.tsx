@@ -105,7 +105,11 @@ const BodyContent = styled.div`
   margin-bottom: ${spacing.xxsmall};
 
   p {
-    margin-top: 0;
+    margin: 0 0 0.5em 0;
+
+    &::last-child {
+      margin-bottom: 0;
+    }
   }
 
   blockquote {
@@ -115,7 +119,7 @@ const BodyContent = styled.div`
   }
 
   strong {
-    font-weight: 600;
+    font-weight: 700;
   }
 `;
 

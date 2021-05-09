@@ -19,11 +19,18 @@ const FeedPopover: React.FC<Props> = ({ isVisible, onClose, buttonRef }) => {
     popperRef.current,
     {
       strategy: "fixed",
+      placement: "bottom-end",
       modifiers: [
         {
           name: "arrow",
           options: {
             element: arrowRef,
+          },
+        },
+        {
+          name: "offset",
+          options: {
+            offset: [0, 8],
           },
         },
       ],
@@ -54,14 +61,18 @@ const FeedPopover: React.FC<Props> = ({ isVisible, onClose, buttonRef }) => {
     };
   }, [isVisible]);
 
-  return isVisible ? (
-    <Popover style={styles.popper} ref={popperRef} {...attributes.popper}>
+  return (
+    <Popover
+      style={{ ...styles.popper, visibility: isVisible ? "visible" : "hidden" }}
+      ref={popperRef}
+      {...attributes.popper}
+      role="dialog"
+      tabIndex={-1}
+    >
       <Arrow ref={setArrowRef} style={styles.arrow} />
-      <PopoverInner>
-        <Feed />
-      </PopoverInner>
+      <PopoverInner>{isVisible && <Feed />}</PopoverInner>
     </Popover>
-  ) : null;
+  );
 };
 
 const Popover = styled.div`

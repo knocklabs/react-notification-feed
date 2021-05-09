@@ -3,11 +3,14 @@ import { fontSizes, palette } from "../../theme";
 
 export const Header = styled.header`
   padding: 12px 16px;
+  height: 42px;
   display: flex;
+  align-items: center;
 `;
 
 export const Selector = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const SelectWrapper = styled.div`
@@ -22,6 +25,7 @@ export const SelectWrapper = styled.div`
     border: none;
     background: none;
     appearance: none;
+    font-size: ${fontSizes.small};
   }
 
   svg {
@@ -34,7 +38,7 @@ export const SelectWrapper = styled.div`
 
 export const Type = styled.span`
   font-size: ${fontSizes.small};
-  font-weight: 500;
+  font-weight: 600;
   color: ${palette.grey["900"]};
   margin-right: 8px;
 `;
