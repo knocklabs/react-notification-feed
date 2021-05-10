@@ -11,19 +11,22 @@ export default {
     apiKey: {
       name: "API key",
       type: { name: "string", required: true },
+      defaultValue: "pk_test_3WZFRVstQbNkDEhF_1gfXn3Ka3WDHSZG9FLltmV8-Pc",
     },
     userId: {
       name: "User ID",
       type: { name: "string", required: true },
+      defaultValue: "samtest1",
     },
     feedId: {
       name: "Feed ID",
       type: { name: "string", required: true },
+      defaultValue: "2b3fe2a4-4d97-4483-a86c-ede25a137c32",
     },
     host: {
       name: "Host",
       type: { name: "string", required: false },
-      defaultValue: "https://api.knock.app",
+      defaultValue: "https://api.knock-dev.app",
     },
   },
 } as Meta;

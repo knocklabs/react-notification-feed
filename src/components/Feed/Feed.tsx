@@ -33,15 +33,16 @@ const Feed: React.FC<Props> = React.forwardRef<HTMLDivElement, Props>(
     ref
   ) => {
     const { status, setStatus, feedClient, useFeedStore } = useKnockFeed();
-    const { items, loading } = useFeedStore();
+    const items = useFeedStore((state) => state.items);
+    const unseenItems = useFeedStore((state) =>
+      state.items.filter((item) => !item.seen_at)
+    );
+    const loading = useFeedStore((state) => state.loading);
     const noItems = items.length === 0;
 
     useEffect(() => {
-      // Mark everything as seen on load
-      const unseenItems = items.filter((item: FeedItem) => !item.seen_at);
-
-      if (unseenItems.length > 0 && isVisible) {
-        feedClient.markAsSeen(items);
+      if (isVisible) {
+        feedClient.markAsSeen(unseenItems);
       }
     }, [isVisible]);
 

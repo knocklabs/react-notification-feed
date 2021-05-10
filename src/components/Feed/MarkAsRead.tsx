@@ -36,7 +36,7 @@ const MarkAsRead = () => {
 
   const onClick = React.useCallback(() => {
     feedClient.markAsRead(unreadItems);
-  }, []);
+  }, [feedClient, unreadItems]);
 
   return (
     <MarkAllAsRead disabled={unreadCount === 0} onClick={onClick}>
