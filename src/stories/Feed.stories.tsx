@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Story, Meta } from "@storybook/react";
 import { KnockFeedProvider } from "../components/FeedProvider";
 import NotificationButton from "../components/NotificationIconButton";
-import FeedPopover from "../components/FeedPopover";
+import FeedPopover from "../components/NotificationFeedPopover";
 
 export default {
   title: "Feed",
