@@ -3,7 +3,6 @@ import { Story, Meta } from "@storybook/react";
 import { KnockFeedProvider } from "../components/FeedProvider";
 import NotificationButton from "../components/NotificationIconButton";
 import FeedPopover from "../components/FeedPopover";
-import { FilterStatus } from "../constants";
 
 export default {
   title: "Feed",
