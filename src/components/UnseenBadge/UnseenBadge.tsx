@@ -15,7 +15,7 @@ const UnseenBadge = () => {
 };
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.red[200]};
+  background-color: ${({ theme }) => theme.colors.red[500]};
   width: ${({ theme }) => theme.spacing[4]};
   height: ${({ theme }) => theme.spacing[4]};
   border-radius: ${({ theme }) => theme.spacing[4]};

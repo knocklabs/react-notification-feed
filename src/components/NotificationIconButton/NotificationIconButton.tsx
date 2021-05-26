@@ -2,7 +2,6 @@ import React, { SyntheticEvent } from "react";
 import styled from "@emotion/styled";
 import BellIcon from "../Icons/Bell";
 import UnseenBadge from "../UnseenBadge";
-import { useTheme } from "@emotion/react";
 
 type Props = {
   onClick: (e: SyntheticEvent) => void;
@@ -10,10 +9,6 @@ type Props = {
 
 const NotificationBadge = React.forwardRef<HTMLButtonElement, Props>(
   ({ onClick }, ref) => {
-    const theme = useTheme();
-
-    console.log(theme);
-
     return (
       <NotificationButton ref={ref} onClick={onClick}>
         <BellIcon />
