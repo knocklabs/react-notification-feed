@@ -51,11 +51,11 @@ const YourAppLayout = () => {
       userToken={currentUser.knockUserToken}
     >
       <NotificationIconButton
-        ref={buttonRef}
+        ref={notifButtonRef}
         onClick={(e) => setIsVisible(!isVisible)}
       />
       <NotificationFeedPopover
-        buttonRef={buttonRef}
+        buttonRef={notifButtonRef}
         isVisible={isVisible}
         onClose={() => setIsVisible(false)}
       />
