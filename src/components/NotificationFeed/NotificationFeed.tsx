@@ -1,10 +1,10 @@
 import { FeedItem } from "@knocklabs/client";
 import React, { ReactNode, useEffect } from "react";
-import EmptyFeed from "../EmptyFeed/EmptyFeed";
-import { useKnockFeed } from "../FeedProvider/FeedProvider";
-import Spinner from "../Spinner";
-import NotificationCell from "../NotificationCell";
-import MarkAsRead from "./MarkAsRead";
+import { EmptyFeed } from "../EmptyFeed";
+import { useKnockFeed } from "../KnockFeedProvider";
+import { Spinner } from "../Spinner";
+import { NotificationCell } from "../NotificationCell";
+import { MarkAsRead } from "./MarkAsRead";
 import { Header, Selector, Type, SpinnerContainer, Container } from "./styles";
 import Dropdown from "./Dropdown";
 import { FilterStatus } from "../../constants";
@@ -16,20 +16,20 @@ export type RenderItemProps = {
   onItemClick?: OnNotificationClick;
 };
 
-export type Props = {
+export interface NotificationFeedProps {
   EmptyComponent?: ReactNode;
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   isVisible: boolean;
-};
+}
 
 const defaultRenderItem = (props: RenderItemProps) => (
   <NotificationCell key={props.item.id} {...props} />
 );
 
-const NotificationFeed: React.FC<Props> = React.forwardRef<
+export const NotificationFeed = React.forwardRef<
   HTMLDivElement,
-  Props
+  NotificationFeedProps
 >(
   (
     {
@@ -92,5 +92,3 @@ const NotificationFeed: React.FC<Props> = React.forwardRef<
     );
   }
 );
-
-export default NotificationFeed;

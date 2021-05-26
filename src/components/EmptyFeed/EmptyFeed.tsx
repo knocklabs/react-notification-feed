@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const EmptyFeed = () => (
+export const EmptyFeed = () => (
   <Container>
     <Inner>
       <Header>No notifications yet</Header>
@@ -52,5 +52,3 @@ const PoweredBy = styled.a`
   position: absolute;
   bottom: ${({ theme }) => theme.spacing[2]};
 `;
-
-export default EmptyFeed;

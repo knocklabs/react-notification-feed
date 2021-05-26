@@ -1,2 +1,2 @@
-export { default } from "./NotificationFeed";
-export { Props as NotificationFeedProps } from "./NotificationFeed";
+export * from "./NotificationFeed";
+export * from "./MarkAsRead";

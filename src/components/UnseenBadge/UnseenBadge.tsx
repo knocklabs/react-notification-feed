@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useKnockFeed } from "../FeedProvider";
+import { useKnockFeed } from "../KnockFeedProvider";
 import { formatBadgeCount } from "../../utils";
 
-const UnseenBadge = () => {
+export const UnseenBadge = () => {
   const { useFeedStore } = useKnockFeed();
   const unseenCount = useFeedStore((state) => state.metadata.unseen_count);
 
@@ -33,5 +33,3 @@ const Count = styled.span`
   color: ${({ theme }) => theme.colors.common.white};
   margin-top: -1px;
 `;
-
-export default UnseenBadge;

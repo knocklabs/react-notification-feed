@@ -8,15 +8,15 @@ function speedSwitch(speed: Speed) {
   return 750;
 }
 
-type Props = {
+export interface SpinnerProps {
   color?: string;
   speed?: Speed;
   gap?: number;
   thickness?: number;
   size?: string;
-};
+}
 
-const Spinner: React.FC<Props> = ({
+export const Spinner: React.FC<SpinnerProps> = ({
   color = "rgba(0,0,0,0.4)",
   speed = "medium",
   gap = 4,
@@ -65,5 +65,3 @@ const Spinner: React.FC<Props> = ({
     />
   </svg>
 );
-
-export default Spinner;

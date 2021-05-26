@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { useKnockFeed } from "../FeedProvider/FeedProvider";
-import CheckmarkCircle from "../Icons/CheckmarkCircle";
+import { useKnockFeed } from "../KnockFeedProvider";
+import { CheckmarkCircle } from "../Icons";
 
-export const MarkAllAsRead = styled.button`
+const MarkAllAsRead = styled.button`
   border: none;
   background: transparent;
   margin-left: auto;
@@ -23,7 +23,7 @@ export const MarkAllAsRead = styled.button`
   }
 `;
 
-const MarkAsRead = () => {
+export const MarkAsRead = () => {
   const { useFeedStore, feedClient } = useKnockFeed();
 
   const unreadItems = useFeedStore((state) =>
@@ -43,5 +43,3 @@ const MarkAsRead = () => {
     </MarkAllAsRead>
   );
 };
-
-export default MarkAsRead;

@@ -8,12 +8,12 @@ function extractInitials(name: string) {
     .join("");
 }
 
-type Props = {
+export interface AvatarProps {
   name: string;
   src?: string;
-};
+}
 
-const Avatar: React.FC<Props> = ({ name, src }) => {
+export const Avatar: React.FC<AvatarProps> = ({ name, src }) => {
   return (
     <Container>
       {src ? (
@@ -48,5 +48,3 @@ const Image = styled.img`
   width: ${({ theme }) => theme.spacing[7]};
   height: ${({ theme }) => theme.spacing[7]};
 `;
-
-export default Avatar;

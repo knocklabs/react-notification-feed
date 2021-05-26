@@ -1,22 +1,23 @@
 import React, { SyntheticEvent } from "react";
 import styled from "@emotion/styled";
-import BellIcon from "../Icons/Bell";
-import UnseenBadge from "../UnseenBadge";
+import { BellIcon } from "../Icons";
+import { UnseenBadge } from "../UnseenBadge";
 
-type Props = {
+export interface NotificationIconButtonProps {
   onClick: (e: SyntheticEvent) => void;
-};
+}
 
-const NotificationBadge = React.forwardRef<HTMLButtonElement, Props>(
-  ({ onClick }, ref) => {
-    return (
-      <NotificationButton ref={ref} onClick={onClick}>
-        <BellIcon />
-        <UnseenBadge />
-      </NotificationButton>
-    );
-  }
-);
+export const NotificationIconButton = React.forwardRef<
+  HTMLButtonElement,
+  NotificationIconButtonProps
+>(({ onClick }, ref) => {
+  return (
+    <NotificationButton ref={ref} onClick={onClick}>
+      <BellIcon />
+      <UnseenBadge />
+    </NotificationButton>
+  );
+});
 
 const NotificationButton = styled.button`
   background-color: transparent;
@@ -35,5 +36,3 @@ const NotificationButton = styled.button`
     margin: 0 auto;
   }
 `;
-
-export default NotificationBadge;

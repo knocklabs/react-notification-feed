@@ -1,5 +1,5 @@
 import React from "react";
-import ChevronDown from "../Icons/ChevronDown";
+import { ChevronDown } from "../Icons";
 import { SelectWrapper } from "./styles";
 
 type Props = {

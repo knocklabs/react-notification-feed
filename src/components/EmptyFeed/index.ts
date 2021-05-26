@@ -1,1 +1,1 @@
-export { default } from "./EmptyFeed";
+export * from "./EmptyFeed";

@@ -1,2 +1,1 @@
-export { default } from "./NotificationFeedPopover";
-export { Props as NotificationFeedPopoverProps } from "./NotificationFeedPopover";
+export * from "./NotificationFeedPopover";

@@ -1,15 +1,15 @@
 import React, { RefObject } from "react";
 import styled from "@emotion/styled";
 import { usePopper } from "react-popper";
-import Feed, { Props as FeedProps } from "../NotificationFeed/NotificationFeed";
+import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
 
-export type Props = {
+export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
   onClose: () => void;
   buttonRef: RefObject<HTMLElement>;
-} & FeedProps;
+}
 
-const NotificationFeedPopover: React.FC<Props> = ({
+export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = ({
   isVisible,
   onClose,
   buttonRef,
@@ -72,7 +72,7 @@ const NotificationFeedPopover: React.FC<Props> = ({
     >
       <Arrow ref={setArrowRef} style={styles.arrow} />
       <PopoverInner>
-        <Feed isVisible={isVisible} {...feedProps} />
+        <NotificationFeed isVisible={isVisible} {...feedProps} />
       </PopoverInner>
     </Popover>
   );
@@ -110,5 +110,3 @@ const Arrow = styled.div`
     height: 10px;
   }
 `;
-
-export default NotificationFeedPopover;

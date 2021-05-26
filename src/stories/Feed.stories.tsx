@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Story, Meta } from "@storybook/react";
-import { KnockFeedProvider } from "../components/FeedProvider";
-import NotificationButton from "../components/NotificationIconButton";
-import FeedPopover from "../components/NotificationFeedPopover";
+import {
+  KnockFeedProvider,
+  NotificationIconButton,
+  NotificationFeedPopover,
+} from "../";
 
 export default {
   title: "Feed",
@@ -49,11 +51,11 @@ const Template: Story<Props> = (args) => {
       host={args.host}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <NotificationButton
+        <NotificationIconButton
           ref={buttonRef}
           onClick={(e) => setIsVisible(!isVisible)}
         />
-        <FeedPopover
+        <NotificationFeedPopover
           buttonRef={buttonRef}
           isVisible={isVisible}
           onClose={() => setIsVisible(false)}

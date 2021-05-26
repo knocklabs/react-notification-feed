@@ -8,28 +8,28 @@ import { FilterStatus } from "../../constants";
 // @ts-ignore
 import { ThemeProvider } from "emotion-theming";
 import * as theme from "../../theme";
-import { Theme as KnockTheme } from "../../theme";
+import { Theme as FeedTheme } from "../../theme";
 
-type KnockFeedProviderState = {
+export interface KnockFeedProviderState {
   knock: Knock;
   feedClient: Feed;
   useFeedStore: UseStore<FeedStoreState>;
   status: FilterStatus;
   setStatus: (status: FilterStatus) => void;
-};
+}
 
 const FeedStateContext = React.createContext<KnockFeedProviderState | null>(
   null
 );
 
-export type Props = {
+export interface KnockFeedProviderProps {
   apiKey: string;
   userId: string;
   userToken?: string;
   feedId: string;
   host?: string;
-  theme?: KnockTheme;
-};
+  theme?: FeedTheme;
+}
 
 const Container = styled.div`
   font-family: ${(props) => props.theme.typography.sanserif}!important;
@@ -42,7 +42,7 @@ const Container = styled.div`
   }
 `;
 
-const KnockFeedProvider: React.FC<Props> = ({
+export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   apiKey,
   userId,
   feedId,
@@ -93,12 +93,10 @@ const KnockFeedProvider: React.FC<Props> = ({
   );
 };
 
-function useKnockFeed(): KnockFeedProviderState {
+export function useKnockFeed(): KnockFeedProviderState {
   const context = React.useContext(FeedStateContext);
   if (context === undefined) {
     throw new Error("useFeedState must be used within a FeedProvider");
   }
   return context as KnockFeedProviderState;
 }
-
-export { KnockFeedProvider, useKnockFeed };
