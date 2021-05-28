@@ -1,6 +1,6 @@
 {
   "name": "@knocklabs/react-notification-feed",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A set of React components to render feeds powered by Knock",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -40,10 +40,10 @@
   "author": "@knocklabs",
   "license": "ISC",
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
     "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0"
+    "@emotion/styled": "^11.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
