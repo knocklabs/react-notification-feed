@@ -3,10 +3,7 @@ import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import styled from "@emotion/styled";
 import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
-// TODO: fix this ignore, which is only here before we needed to use emotion themeing
-// over using the ThemeProvider in @emotion/react because of storybook?
-// @ts-ignore
-import { ThemeProvider } from "emotion-theming";
+import { ThemeProvider } from "@emotion/react";
 import * as theme from "../../theme";
 import { Theme as FeedTheme } from "../../theme";
 
