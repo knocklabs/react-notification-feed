@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { CheckmarkCircle } from "../Icons";
+import * as theme from "../../theme";
 
 const MarkAllAsRead = styled.button`
   border: none;
@@ -10,15 +11,15 @@ const MarkAllAsRead = styled.button`
   display: flex;
   align-items: center;
   padding: 0;
-  color: ${({ theme }) => theme.colors.gray[400]};
+  color: ${theme.colors.gray[400]};
   cursor: pointer;
 
   svg {
-    margin-left: ${({ theme }) => theme.spacing[1]};
+    margin-left: ${theme.spacing[1]};
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.colors.gray[200]};
+    color: ${theme.colors.gray[200]};
     cursor: not-allowed;
   }
 `;

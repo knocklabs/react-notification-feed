@@ -2,6 +2,7 @@ import React, { RefObject } from "react";
 import styled from "@emotion/styled";
 import { usePopper } from "react-popper";
 import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
+import * as theme from "../../theme";
 
 export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
@@ -83,7 +84,7 @@ const Popover = styled.div`
   max-width: 400px;
   min-width: 280px;
   height: 400px;
-  background-color: ${({ theme }) => theme.colors.common.white};
+  background-color: ${theme.colors.common.white};
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
   z-index: 999;
 `;
@@ -100,7 +101,7 @@ const Arrow = styled.div`
   &:after {
     content: " ";
     display: block;
-    background-color: ${({ theme }) => theme.colors.common.white};
+    background-color: ${theme.colors.common.white};
     box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
     position: absolute;
     top: -5px;

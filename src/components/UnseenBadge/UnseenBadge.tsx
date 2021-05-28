@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { formatBadgeCount } from "../../utils";
+import * as theme from "../../theme";
 
 export const UnseenBadge = () => {
   const { useFeedStore } = useKnockFeed();
@@ -15,10 +16,10 @@ export const UnseenBadge = () => {
 };
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.red[500]};
-  width: ${({ theme }) => theme.spacing[4]};
-  height: ${({ theme }) => theme.spacing[4]};
-  border-radius: ${({ theme }) => theme.spacing[4]};
+  background-color: ${theme.colors.red[500]};
+  width: ${theme.spacing[4]};
+  height: ${theme.spacing[4]};
+  border-radius: ${theme.spacing[4]};
   position: absolute;
   display: flex;
   align-items: center;
@@ -29,7 +30,7 @@ const Container = styled.div`
 
 const Count = styled.span`
   font-size: 9px;
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.common.white};
+  font-weight: ${theme.fontWeights.medium};
+  color: ${theme.colors.common.white};
   margin-top: -1px;
 `;

@@ -8,6 +8,6 @@ export * from "./components/NotificationIconButton";
 export * from "./components/Spinner";
 export * from "./components/UnseenBadge";
 export * as theme from "./theme";
-export { Theme } from "./theme";
+export * from "./interfaces";
 export * as utils from "./utils";
 export * from "./constants";

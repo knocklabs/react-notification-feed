@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import * as theme from "../../theme";
 
 function extractInitials(name: string) {
   return name
@@ -26,25 +27,25 @@ export const Avatar: React.FC<AvatarProps> = ({ name, src }) => {
 };
 
 const Container = styled.div`
-  border-radius: ${({ theme }) => theme.spacing[7]};
-  width: ${({ theme }) => theme.spacing[7]};
-  height: ${({ theme }) => theme.spacing[7]};
+  border-radius: ${theme.spacing[7]};
+  width: ${theme.spacing[7]};
+  height: ${theme.spacing[7]};
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.brand[300]};
+  background-color: ${theme.colors.brand[300]};
 `;
 
 const Initials = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  line-height: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.common.white};
+  font-size: ${theme.fontSizes.md};
+  line-height: ${theme.fontSizes.lg};
+  color: ${theme.colors.common.white};
 `;
 
 const Image = styled.img`
   object-fit: cover;
-  width: ${({ theme }) => theme.spacing[7]};
-  height: ${({ theme }) => theme.spacing[7]};
+  width: ${theme.spacing[7]};
+  height: ${theme.spacing[7]};
 `;

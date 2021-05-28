@@ -3,9 +3,7 @@ import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import styled from "@emotion/styled";
 import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
-import { ThemeProvider } from "@emotion/react";
 import * as theme from "../../theme";
-import { Theme as FeedTheme } from "../../theme";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -25,16 +23,15 @@ export interface KnockFeedProviderProps {
   userToken?: string;
   feedId: string;
   host?: string;
-  theme?: FeedTheme;
 }
 
 const Container = styled.div`
-  font-family: ${(props) => props.theme.typography.sanserif}!important;
+  font-family: ${theme.typography.sanserif}!important;
   margin: 0 !important;
   padding: 0 !important;
 
   * {
-    font-family: ${(props) => props.theme.typography.sanserif}!important;
+    font-family: ${theme.typography.sanserif}!important;
     box-sizing: border-box;
   }
 `;
@@ -46,7 +43,6 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   userToken,
   host,
   children,
-  theme: overridenTheme,
 }) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
@@ -83,9 +79,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
 
   return (
     <FeedStateContext.Provider value={state}>
-      <ThemeProvider theme={overridenTheme ?? theme}>
-        <Container>{children}</Container>
-      </ThemeProvider>
+      <Container>{children}</Container>
     </FeedStateContext.Provider>
   );
 };

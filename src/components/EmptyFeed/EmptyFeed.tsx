@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import * as theme from "../../theme";
 
 export const EmptyFeed = () => (
   <Container>
@@ -33,22 +34,22 @@ const Inner = styled.div`
 `;
 
 const Header = styled.h2`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  margin: 0 0 ${({ theme }) => theme.spacing[1]};
+  font-size: ${theme.fontSizes.md};
+  font-weight: ${theme.fontWeights.medium};
+  margin: 0 0 ${theme.spacing[1]};
 `;
 
 const Body = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.gray[300]};
+  font-size: ${theme.fontSizes.md};
+  color: ${theme.colors.gray[300]};
   margin: 0;
 `;
 
 const PoweredBy = styled.a`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.gray[200]};
+  font-size: ${theme.fontSizes.xs};
+  font-weight: ${theme.fontWeights.medium};
+  color: ${theme.colors.gray[200]};
   text-decoration: none;
   position: absolute;
-  bottom: ${({ theme }) => theme.spacing[2]};
+  bottom: ${theme.spacing[2]};
 `;

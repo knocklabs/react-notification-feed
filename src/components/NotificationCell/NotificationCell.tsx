@@ -4,6 +4,7 @@ import { ContentBlock, FeedItem } from "@knocklabs/client";
 import { formatTimestamp } from "../../utils";
 import { Avatar } from "./Avatar";
 import { useKnockFeed } from "../KnockFeedProvider";
+import * as theme from "../../theme";
 
 export interface NotificationCellProps {
   item: FeedItem;
@@ -75,7 +76,7 @@ const InnerContainer = styled.button`
   width: 100%;
   text-decoration: none;
   display: flex;
-  padding: ${({ theme }) => theme.spacing[3]};
+  padding: ${theme.spacing[3]};
   cursor: pointer;
   text-align: left;
 
@@ -94,43 +95,43 @@ const UnreadDot = styled.div`
   width: 6px;
   height: 6px;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.brand[100]};
+  background-color: ${theme.colors.brand[100]};
 `;
 
 const Content = styled.div`
-  margin-left: ${({ theme }) => theme.spacing[3]};
+  margin-left: ${theme.spacing[3]};
 `;
 
 const BodyContent = styled.div`
-  color: ${({ theme }) => theme.colors.gray[900]};
+  color: ${theme.colors.gray[900]};
   display: block;
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  line-height: ${({ theme }) => theme.fontSizes.xl};
-  margin-bottom: ${({ theme }) => theme.spacing[1]};
+  font-weight: ${theme.fontWeights.normal};
+  font-size: ${theme.fontSizes.sm};
+  line-height: ${theme.fontSizes.xl};
+  margin-bottom: ${theme.spacing[1]};
 
   h1,
   h2,
   h3,
   h4 {
-    font-weight: ${({ theme }) => theme.fontWeights.semibold};
+    font-weight: ${theme.fontWeights.semibold};
     margin-bottom: 0.5em;
   }
 
   h1 {
-    font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+    font-size: ${theme.fontSizes["2xl"]};
   }
 
   h2 {
-    font-size: ${({ theme }) => theme.fontSizes.xl};
+    font-size: ${theme.fontSizes.xl};
   }
 
   h3 {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-size: ${theme.fontSizes.lg};
   }
 
   h4 {
-    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-size: ${theme.fontSizes.md};
   }
 
   p {
@@ -142,21 +143,21 @@ const BodyContent = styled.div`
   }
 
   blockquote {
-    border-left: 3px solid ${({ theme }) => theme.colors.gray[200]};
-    padding-left: ${({ theme }) => theme.spacing[2]};
-    line-height: ${({ theme }) => theme.fontSizes["xl"]};
+    border-left: 3px solid ${theme.colors.gray[200]};
+    padding-left: ${theme.spacing[2]};
+    line-height: ${theme.fontSizes["xl"]};
     margin: 0;
   }
 
   strong {
-    font-weight: ${({ theme }) => theme.fontWeights.semibold};
+    font-weight: ${theme.fontWeights.semibold};
   }
 `;
 
 const Timestamp = styled.span`
   display: block;
-  color: ${({ theme }) => theme.colors.gray[300]};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  line-height: ${({ theme }) => theme.fontSizes.lg};
+  color: ${theme.colors.gray[300]};
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.normal};
+  line-height: ${theme.fontSizes.lg};
 `;
