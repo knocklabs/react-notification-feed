@@ -40,7 +40,7 @@ const Header = styled.h2`
 `;
 
 const Body = styled.p`
-  font-size: ${theme.fontSizes.md};
+  font-size: ${theme.fontSizes.sm};
   color: ${theme.colors.gray[300]};
   margin: 0;
 `;

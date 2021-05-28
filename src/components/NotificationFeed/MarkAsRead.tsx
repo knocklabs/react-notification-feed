@@ -11,6 +11,7 @@ const MarkAllAsRead = styled.button`
   display: flex;
   align-items: center;
   padding: 0;
+  font-size: ${theme.fontSizes.sm};
   color: ${theme.colors.gray[400]};
   cursor: pointer;
 
