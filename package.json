@@ -65,7 +65,7 @@
   "dependencies": {
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@knocklabs/client": "^0.3.4",
+    "@knocklabs/client": "^0.4.3",
     "@popperjs/core": "^2.9.2",
     "date-fns": "^2.21.1",
     "react": ">=16.8.0",

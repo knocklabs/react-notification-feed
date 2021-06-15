@@ -23,6 +23,9 @@ export interface KnockFeedProviderProps {
   userToken?: string;
   feedId: string;
   host?: string;
+  // Feed client scoping options
+  source?: string;
+  tenant?: string;
 }
 
 const Container = styled.div`
@@ -43,6 +46,8 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   userToken,
   host,
   children,
+  source,
+  tenant,
 }) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
@@ -54,11 +59,11 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   }, [apiKey, host, userId, userToken]);
 
   const [feedClient, useFeedStore] = React.useMemo(() => {
-    const feedClient = knock.feeds.initialize(feedId);
+    const feedClient = knock.feeds.initialize(feedId, { source, tenant });
     const useFeedStore = create(feedClient.store);
 
     return [feedClient, useFeedStore];
-  }, [knock, feedId]);
+  }, [knock, feedId, source, tenant]);
 
   React.useEffect(() => {
     feedClient.listenForUpdates();

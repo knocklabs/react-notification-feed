@@ -49,6 +49,8 @@ const YourAppLayout = () => {
       userId={currentUser.id}
       // Optional in non production environments
       userToken={currentUser.knockUserToken}
+      // Optionally you can scope the feed in a particular manner
+      // tenant={currentWorkspace.id}
     >
       <NotificationIconButton
         ref={notifButtonRef}

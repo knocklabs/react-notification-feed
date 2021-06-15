@@ -29,6 +29,11 @@ export default {
       type: { name: "string", required: false },
       defaultValue: "http://localhost:4001",
     },
+    tenant: {
+      name: "Tenant ID",
+      type: { name: "string", required: false },
+      defaultValue: "",
+    },
   },
 } as Meta;
 
@@ -37,6 +42,7 @@ type Props = {
   userId: string;
   feedId: string;
   apiKey: string;
+  tenant: string;
 };
 
 const Template: Story<Props> = (args) => {
@@ -49,6 +55,7 @@ const Template: Story<Props> = (args) => {
       userId={args.userId}
       feedId={args.feedId}
       host={args.host}
+      tenant={args.tenant}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <NotificationIconButton
