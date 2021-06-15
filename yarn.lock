@@ -1433,10 +1433,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@knocklabs/client@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.4.3.tgz#2c777ea80f9b3ff5c785a2ffeab847b7022b63f1"
-  integrity sha512-vkU3sp6LiOB7MAjH6SVwM3O5gCxCckwGPuZbw6/j8AeUZN77gS6b6gFi4nWcXlv4PaaF5G84Yhg4dQmjRREsdQ==
+"@knocklabs/client@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.4.4.tgz#0ee9f50e694a094e0feae3fb75f08f7f35c86331"
+  integrity sha512-tD4DUIsx2XgTt1g7sI7ADynIr/kfnCTtALEqQ8/c9EUOGOfocP7YtPtucNyf1OwPUbQtDg/FbKlfEGZc6R1QMg==
   dependencies:
     axios "^0.21.1"
     axios-retry "^3.1.9"
