@@ -1,0 +1,58 @@
+:root {
+  /* Font sizes */
+  --rnf-font-size-xs: 0.75rem;
+  --rnf-font-size-sm: 0.875rem;
+  --rnf-font-size-md: 1rem;
+  --rnf-font-size-lg: 1.125rem;
+  --rnf-font-size-xl: 1.266rem;
+  --rnf-font-size-2xl: 1.5rem;
+  --rnf-font-size-3xl: 1.75rem;
+
+  /* Spacing */
+  --rnf-spacing-0: 0;
+  --rnf-spacing-1: 4px;
+  --rnf-spacing-2: 8px;
+  --rnf-spacing-3: 12px;
+  --rnf-spacing-4: 16px;
+  --rnf-spacing-5: 20px;
+  --rnf-spacing-6: 24px;
+  --rnf-spacing-7: 32px;
+  --rnf-spacing-8: 42px;
+
+  /* Font weights */
+  --rnf-font-weight-normal: 400;
+  --rnf-font-weight-medium: 500;
+  --rnf-font-weight-semibold: 600;
+  --rnf-font-weight-bold: 700;
+
+  /* Font family */
+  --rnf-font-family-sanserif: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif",
+
+  /* Border radius */
+  --rnf-border-radius-sm: 2px;
+  --rnf-border-radius-md: 4px;
+  --rnf-border-radius-lg: 8px;
+
+  /* Shadows */
+  --rnf-shadow-sm: 0px 5px 10px rgba(0, 0, 0, 0.12);
+  --rnf-shadow-md: 0px 8px 30px rgba(0, 0, 0, 0.24);
+
+  /* Colors */
+  --rnf-color-white: #fff;
+  --rnf-color-black: #000;
+  --rnf-color-gray-900: #1A1F36;
+  --rnf-color-gray-800: #3C4257;
+  --rnf-color-gray-700: #3C4257;
+  --rnf-color-gray-600: #515669;
+  --rnf-color-gray-500: #697386;
+  --rnf-color-gray-400: #9EA0AA;
+  --rnf-color-gray-300: #A5ACB8;
+  --rnf-color-gray-200: #DDDEE1;
+  --rnf-color-gray-100: #E4E8EE;
+
+  /* Component specific colors */
+  --rnf-unread-badge-bg-color: #DD514C;
+  --rnf-avatar-bg-color: #EF8476;
+  --rnf-message-cell-unread-dot-bg-color: #F4ADA4;
+  --rnf-message-cell-hover-bg-color: #f1f6fc;
+}

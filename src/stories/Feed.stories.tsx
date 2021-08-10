@@ -12,7 +12,7 @@ export default {
     apiKey: {
       name: "API key",
       type: { name: "string", required: true },
-      defaultValue: "pk_test_WcXTzGrX4LOIHCnMq4PIYPWIH0Quu2mnQlcN-UUdoGA",
+      defaultValue: "pk_test_3WZFRVstQbNkDEhF_1gfXn3Ka3WDHSZG9FLltmV8-Pc",
     },
     userId: {
       name: "User ID",
@@ -22,12 +22,12 @@ export default {
     feedId: {
       name: "Feed ID",
       type: { name: "string", required: true },
-      defaultValue: "97e0f24a-35c6-45e5-b69f-58b88e3004de",
+      defaultValue: "2b3fe2a4-4d97-4483-a86c-ede25a137c32",
     },
     host: {
       name: "Host",
       type: { name: "string", required: false },
-      defaultValue: "http://localhost:4001",
+      defaultValue: "https://api.knock-dev.app",
     },
     tenant: {
       name: "Tenant ID",

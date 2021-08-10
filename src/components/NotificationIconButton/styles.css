@@ -1,0 +1,22 @@
+:root {
+  --rnf-notification-icon-button-size: 32px;
+  --rnf-notification-icon-button-bg-color: transparent;
+}
+
+.rnf-notification-icon-button {
+  background-color: var(--rnf-notification-icon-button-bg-color);
+  border: none;
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  width: var(--rnf-notification-icon-button-size);
+  height: var(--rnf-notification-icon-button-size);
+  color: inherit;
+}
+
+.rnf-notification-icon-button svg {
+  display: block;
+  margin: 0 auto;
+}

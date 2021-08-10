@@ -1,29 +1,8 @@
-import styled from "@emotion/styled";
 import * as React from "react";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { CheckmarkCircle } from "../Icons";
-import * as theme from "../../theme";
 
-const MarkAllAsRead = styled.button`
-  border: none;
-  background: transparent;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.gray[400]};
-  cursor: pointer;
-
-  svg {
-    margin-left: ${theme.spacing[1]};
-  }
-
-  &:disabled {
-    color: ${theme.colors.gray[200]};
-    cursor: not-allowed;
-  }
-`;
+import "./styles.css";
 
 export const MarkAsRead = () => {
   const { useFeedStore, feedClient } = useKnockFeed();
@@ -39,9 +18,13 @@ export const MarkAsRead = () => {
   }, [feedClient, unreadItems]);
 
   return (
-    <MarkAllAsRead disabled={unreadCount === 0} onClick={onClick}>
+    <button
+      className="rnf-mark-all-as-read"
+      disabled={unreadCount === 0}
+      onClick={onClick}
+    >
       Mark all as read
       <CheckmarkCircle />
-    </MarkAllAsRead>
+    </button>
   );
 };

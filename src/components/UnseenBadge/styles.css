@@ -1,0 +1,27 @@
+@import url("../../theme.css");
+
+:root {
+  --rnf-unseen-badge-bg-color: #dd514c;
+  --rnf-unseen-badge-size: 16px;
+  --rnf-unseed-badge-font-size: 9px;
+}
+
+.rnf-unseen-badge {
+  background-color: var(--rnf-unseen-badge-bg-color);
+  width: var(--rnf-unseen-badge-size);
+  height: var(--rnf-unseen-badge-size);
+  border-radius: var(--rnf-unseen-badge-size);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  right: 0px;
+}
+
+.rnf-unseen-badge__count {
+  font-size: var(--rnf-unseed-badge-font-size);
+  font-weight: var(--rnf-font-weight-medium);
+  color: var(--rnf-color-white);
+  margin-top: -1px;
+}

@@ -1,20 +1,21 @@
 import React from "react";
 import { ChevronDown } from "../Icons";
-import { SelectWrapper } from "./styles";
 
-type Props = {
+import "./styles.css";
+
+export type DropdownProps = {
   value: string;
   onChange: (e: any) => void;
 };
 
-const Dropdown: React.FC<Props> = ({ children, value, onChange }) => {
+const Dropdown: React.FC<DropdownProps> = ({ children, value, onChange }) => {
   return (
-    <SelectWrapper>
+    <div className="rnf-dropdown">
       <select value={value} onChange={onChange}>
         {children}
       </select>
       <ChevronDown />
-    </SelectWrapper>
+    </div>
   );
 };
 

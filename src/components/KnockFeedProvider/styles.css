@@ -1,0 +1,10 @@
+.rnf-feed-provider {
+  font-family: var(--rnf-font-family-sanserif) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rnf-feed-provider * {
+  font-family: var(--rnf-font-family-sanserif) !important;
+  box-sizing: border-box;
+}
