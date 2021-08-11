@@ -88,6 +88,8 @@
   font-size: var(--rnf-notification-cell-content-font-size);
   line-height: var(--rnf-notification-cell-content-line-height);
   margin-bottom: var(--rnf-spacing-1);
+  word-break: normal;
+  word-wrap: break-word;
 }
 
 .rnf-notification-cell__content h1,
