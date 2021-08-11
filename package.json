@@ -1,12 +1,14 @@
 {
   "name": "@knocklabs/react-notification-feed",
-  "version": "0.4.0-rc.2",
+  "version": "0.4.0-rc.4",
   "description": "A set of React components to render feeds powered by Knock",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
+  "style": "dist/index.css",
   "exports": {
+    "./index.css": "./dist/index.css",
     ".": {
       "require": "./dist/cjs/index.js",
       "default": "./dist/esm/index.js"
