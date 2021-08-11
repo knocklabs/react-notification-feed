@@ -1,5 +1,3 @@
-@import url("../../theme.css");
-
 :root {
   --rnf-empty-feed-max-w: 240px;
   --rnf-empty-feed-header-font-size: var(--rnf-font-size-md);

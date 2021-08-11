@@ -1,3 +1,5 @@
+import "./theme.css";
+
 export * from "./components/EmptyFeed";
 export * from "./components/Icons";
 export * from "./components/KnockFeedProvider";
