@@ -22,6 +22,7 @@ module.exports = function (api) {
 
   const plugins = [
     "@babel/plugin-proposal-class-properties",
+    "babel-plugin-date-fns",
     [
       "babel-plugin-transform-remove-imports",
       {
