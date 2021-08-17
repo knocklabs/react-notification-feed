@@ -38,6 +38,9 @@ import {
   NotificationFeedPopover,
 } from "@knocklabs/react-notification-feed";
 
+// Required CSS import, unless you're overriding the styling
+import "@knocklabs/react-notification-feed/dist/index.css";
+
 const YourAppLayout = () => {
   const [isVisible, setIsVisible] = useState(false);
   const notifButtonRef = useRef(null);
