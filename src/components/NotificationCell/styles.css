@@ -1,0 +1,144 @@
+:root {
+  --rnf-avatar-bg-color: #ef8476;
+  --rnf-avatar-size: 32px;
+  --rnf-avatar-initials-font-size: var(--rnf-font-size-md);
+  --rnf-avatar-initials-line-height: var(--rnf-font-size-lg);
+  --rnf-avatar-initials-color: #fff;
+  --rnf-notification-cell-border-bottom-color: rgba(55, 53, 47, 0.09);
+  --rnf-notification-cell-padding: var(--rnf-spacing-3);
+  --rnf-notification-cell-active-bg-color: #f1f6fc;
+  --rnf-notification-cell-unread-dot-size: 6px;
+  --rnf-notification-cell-unread-dot-bg-color: #f4ada4;
+  --rnf-notification-cell-content-color: var(--rnf-color-gray-900);
+  --rnf-notification-cell-content-font-size: var(--rnf-font-size-sm);
+  --rnf-notification-cell-content-line-height: var(--rnf-font-size-lg);
+}
+
+/* Avatar */
+
+.rnf-avatar {
+  background-color: var(--rnf-avatar-bg-color);
+  border-radius: var(--rnf-avatar-size);
+  width: var(--rnf-avatar-size);
+  height: var(--rnf-avatar-size);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rnf-avatar__initials {
+  font-size: var(--rnf-avatar-initials-font-size);
+  line-height: var(--rnf-avatar-initials-line-height);
+  color: var(--rnf-avatar-initials-color);
+}
+
+.rnf-avatar__image {
+  object-fit: cover;
+  width: var(--rnf-avatar-size);
+  height: var(--rnf-avatar-size);
+}
+
+/* Notification cell */
+
+.rnf-notification-cell {
+  position: relative;
+  border-bottom: 1px solid var(--rnf-notification-cell-border-bottom-color);
+}
+
+.rnf-notification-cell__inner {
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  margin: 0;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+  padding: var(--rnf-notification-cell-padding);
+  cursor: pointer;
+  text-align: left;
+}
+
+.rnf-notification-cell__inner:hover,
+.rnf-notification-cell__inner:focus,
+.rnf-notification-cell__inner:active {
+  background-color: var(--rnf-notification-cell-active-bg-color);
+  outline: none;
+}
+
+.rnf-notification-cell__unread-dot {
+  position: absolute;
+  top: var(--rnf-notification-cell-unread-dot-size);
+  left: var(--rnf-notification-cell-unread-dot-size);
+  width: var(--rnf-notification-cell-unread-dot-size);
+  height: var(--rnf-notification-cell-unread-dot-size);
+  border-radius: var(--rnf-notification-cell-unread-dot-size);
+  background-color: var(--rnf-notification-cell-unread-dot-bg-color);
+}
+
+.rnf-notification-cell__content-outer {
+  margin-left: var(--rnf-spacing-3);
+}
+
+.rnf-notification-cell__content {
+  color: var(--rnf-notification-cell-content-color);
+  display: block;
+  font-weight: var(--rnf-font-weight-normal);
+  font-size: var(--rnf-notification-cell-content-font-size);
+  line-height: var(--rnf-notification-cell-content-line-height);
+  margin-bottom: var(--rnf-spacing-1);
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+.rnf-notification-cell__content h1,
+.rnf-notification-cell__content h2,
+.rnf-notification-cell__content h3,
+.rnf-notification-cell__content h4 {
+  font-weight: var(--rnf-font-weight-semibold);
+  margin-bottom: 0.5em;
+}
+
+.rnf-notification-cell__content h1 {
+  font-size: var(--rnf-font-size-2xl);
+}
+
+.rnf-notification-cell__content h2 {
+  font-size: var(--rnf-font-size-xl);
+}
+
+.rnf-notification-cell__content h3 {
+  font-size: var(--rnf-font-size-lg);
+}
+
+.rnf-notification-cell__content h4 {
+  font-size: var(--rnf-font-size-md);
+}
+
+.rnf-notification-cell__content p {
+  margin: 0 0 0.75em 0;
+}
+
+.rnf-notification-cell__content p:last-child {
+  margin-bottom: 0;
+}
+
+.rnf-notification-cell__content blockquote {
+  border-left: 3px solid var(--rnf-color-gray-300);
+  padding-left: var(--rnf-spacing-3);
+  line-height: var(--rnf-font-size-xl);
+  margin: 0;
+}
+
+.rnf-notification-cell__content strong {
+  font-weight: var(--rnf-font-weight-semibold);
+}
+
+.rnf-notification-cell__timestamp {
+  display: block;
+  color: var(--rnf-color-gray-300);
+  font-size: var(--rnf-font-size-sm);
+  font-weight: var(--rnf-font-weight-normal);
+  line-height: var(--rnf-font-size-lg);
+}

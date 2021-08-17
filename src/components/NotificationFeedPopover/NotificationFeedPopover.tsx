@@ -1,8 +1,8 @@
 import React, { RefObject } from "react";
-import styled from "@emotion/styled";
 import { usePopper } from "react-popper";
 import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
-import * as theme from "../../theme";
+
+import "./styles.css";
 
 export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
@@ -64,50 +64,22 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
   }, [isVisible]);
 
   return (
-    <Popover
+    <div
+      className="rnf-notification-feed-popover"
       style={{ ...styles.popper, visibility: isVisible ? "visible" : "hidden" }}
       ref={popperRef}
       {...attributes.popper}
       role="dialog"
       tabIndex={-1}
     >
-      <Arrow ref={setArrowRef} style={styles.arrow} />
-      <PopoverInner>
+      <div
+        className="rnf-notification-feed-popover__arrow"
+        ref={setArrowRef}
+        style={styles.arrow}
+      />
+      <div className="rnf-notification-feed-popover__inner">
         <NotificationFeed isVisible={isVisible} {...feedProps} />
-      </PopoverInner>
-    </Popover>
+      </div>
+    </div>
   );
 };
-
-const Popover = styled.div`
-  width: 100%;
-  max-width: 400px;
-  min-width: 280px;
-  height: 400px;
-  background-color: ${theme.colors.common.white};
-  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
-  z-index: 999;
-`;
-
-const PopoverInner = styled.div`
-  height: 100%;
-`;
-
-const Arrow = styled.div`
-  position: absolute;
-  width: 10px;
-  height: 10px;
-
-  &:after {
-    content: " ";
-    display: block;
-    background-color: ${theme.colors.common.white};
-    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: -5px;
-    left: 0;
-    transform: rotate(45deg);
-    width: 10px;
-    height: 10px;
-  }
-`;

@@ -5,9 +5,10 @@ import { useKnockFeed } from "../KnockFeedProvider";
 import { Spinner } from "../Spinner";
 import { NotificationCell } from "../NotificationCell";
 import { MarkAsRead } from "./MarkAsRead";
-import { Header, Selector, Type, SpinnerContainer, Container } from "./styles";
 import Dropdown from "./Dropdown";
 import { FilterStatus } from "../../constants";
+
+import "./styles.css";
 
 export type OnNotificationClick = (item: FeedItem) => void;
 export type RenderItem = ({ item }: RenderItemProps) => ReactNode;
@@ -56,9 +57,9 @@ export const NotificationFeed = React.forwardRef<
 
     return (
       <>
-        <Header>
-          <Selector>
-            <Type>Notifications</Type>
+        <header className="rnf-notification-feed__header">
+          <div className="rnf-notification-feed__selector">
+            <span className="rnf-notification-feed__type">Notifications</span>
             <Dropdown
               value={status}
               onChange={(e) => setStatus(e.target.value)}
@@ -71,14 +72,15 @@ export const NotificationFeed = React.forwardRef<
                 )
               )}
             </Dropdown>
-          </Selector>
+          </div>
           <MarkAsRead />
-        </Header>
-        <Container ref={ref}>
+        </header>
+
+        <div className="rnf-notification-feed__container" ref={ref}>
           {loading && (
-            <SpinnerContainer>
+            <div className="rnf-notification-feed__spinner-container">
               <Spinner thickness={3} size="16px" />
-            </SpinnerContainer>
+            </div>
           )}
 
           {!loading &&
@@ -87,7 +89,7 @@ export const NotificationFeed = React.forwardRef<
             )}
 
           {!loading && noItems && EmptyComponent}
-        </Container>
+        </div>
       </>
     );
   }

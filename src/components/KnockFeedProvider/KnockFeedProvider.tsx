@@ -1,9 +1,9 @@
 import * as React from "react";
 import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
-import styled from "@emotion/styled";
 import create, { UseStore } from "zustand";
 import { FilterStatus } from "../../constants";
-import * as theme from "../../theme";
+
+import "./styles.css";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -27,17 +27,6 @@ export interface KnockFeedProviderProps {
   source?: string;
   tenant?: string;
 }
-
-const Container = styled.div`
-  font-family: ${theme.typography.sanserif}!important;
-  margin: 0 !important;
-  padding: 0 !important;
-
-  * {
-    font-family: ${theme.typography.sanserif}!important;
-    box-sizing: border-box;
-  }
-`;
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   apiKey,
@@ -84,7 +73,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
 
   return (
     <FeedStateContext.Provider value={state}>
-      <Container>{children}</Container>
+      <div className="rnf-feed-provider">{children}</div>
     </FeedStateContext.Provider>
   );
 };

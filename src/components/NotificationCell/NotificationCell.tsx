@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import styled from "@emotion/styled";
 import { ContentBlock, FeedItem } from "@knocklabs/client";
 import { formatTimestamp } from "../../utils";
 import { Avatar } from "./Avatar";
 import { useKnockFeed } from "../KnockFeedProvider";
-import * as theme from "../../theme";
+
+import "./styles.css";
 
 export interface NotificationCellProps {
   item: FeedItem;
@@ -44,120 +44,24 @@ export const NotificationCell = React.forwardRef<
   const actor = hasActors && item.actors[0];
 
   return (
-    <Container ref={ref}>
-      <InnerContainer onClick={onClick}>
-        {!item.read_at && <UnreadDot />}
+    <div ref={ref} className="rnf-notification-cell">
+      <button onClick={onClick} className="rnf-notification-cell__inner">
+        {!item.read_at && <div className="rnf-notification-cell__unread-dot" />}
 
         {actor && <Avatar name={actor.name} src={(actor as any).avatar} />}
-        <Content>
+        <div className="rnf-notification-cell__content-outer">
           {blocksByName.body && (
-            <BodyContent
+            <div
+              className="rnf-notification-cell__content"
               dangerouslySetInnerHTML={{ __html: blocksByName.body.rendered }}
             />
           )}
 
-          <Timestamp>{formatTimestamp(item.inserted_at)}</Timestamp>
-        </Content>
-      </InnerContainer>
-    </Container>
+          <span className="rnf-notification-cell__timestamp">
+            {formatTimestamp(item.inserted_at)}
+          </span>
+        </div>
+      </button>
+    </div>
   );
 });
-
-const Container = styled.div`
-  position: relative;
-  border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-`;
-
-const InnerContainer = styled.button`
-  background-color: transparent;
-  border: none;
-  appearance: none;
-  margin: 0;
-  width: 100%;
-  text-decoration: none;
-  display: flex;
-  padding: ${theme.spacing[3]};
-  cursor: pointer;
-  text-align: left;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: #f1f6fc;
-    outline: none;
-  }
-`;
-
-const UnreadDot = styled.div`
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  width: 6px;
-  height: 6px;
-  border-radius: 6px;
-  background-color: ${theme.colors.brand[100]};
-`;
-
-const Content = styled.div`
-  margin-left: ${theme.spacing[3]};
-`;
-
-const BodyContent = styled.div`
-  color: ${theme.colors.gray[900]};
-  display: block;
-  font-weight: ${theme.fontWeights.normal};
-  font-size: ${theme.fontSizes.sm};
-  line-height: ${theme.fontSizes.xl};
-  margin-bottom: ${theme.spacing[1]};
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: ${theme.fontWeights.semibold};
-    margin-bottom: 0.5em;
-  }
-
-  h1 {
-    font-size: ${theme.fontSizes["2xl"]};
-  }
-
-  h2 {
-    font-size: ${theme.fontSizes.xl};
-  }
-
-  h3 {
-    font-size: ${theme.fontSizes.lg};
-  }
-
-  h4 {
-    font-size: ${theme.fontSizes.md};
-  }
-
-  p {
-    margin: 0 0 0.75em 0;
-
-    &::last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  blockquote {
-    border-left: 3px solid ${theme.colors.gray[200]};
-    padding-left: ${theme.spacing[2]};
-    line-height: ${theme.fontSizes["xl"]};
-    margin: 0;
-  }
-
-  strong {
-    font-weight: ${theme.fontWeights.semibold};
-  }
-`;
-
-const Timestamp = styled.span`
-  display: block;
-  color: ${theme.colors.gray[300]};
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.normal};
-  line-height: ${theme.fontSizes.lg};
-`;
