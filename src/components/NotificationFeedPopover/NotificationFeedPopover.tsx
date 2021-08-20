@@ -1,6 +1,7 @@
 import React, { RefObject } from "react";
 import { usePopper } from "react-popper";
 import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
+import useComponentVisible from "../../hooks/useComponentVisible";
 
 import "./styles.css";
 
@@ -16,7 +17,7 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
   buttonRef,
   ...feedProps
 }) => {
-  const popperRef = React.useRef<HTMLDivElement | null>(null);
+  const { ref: popperRef } = useComponentVisible(isVisible, onClose);
   const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
 
   const { styles, attributes } = usePopper(
@@ -41,27 +42,6 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
       ],
     }
   );
-
-  const handleClickOutside = React.useCallback(
-    (e) => {
-      if (popperRef.current && popperRef.current.contains(e.target)) {
-        return;
-      }
-
-      onClose();
-    },
-    [onClose]
-  );
-
-  React.useEffect(() => {
-    if (isVisible) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isVisible]);
 
   return (
     <div

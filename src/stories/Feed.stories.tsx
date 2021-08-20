@@ -6,6 +6,8 @@ import {
   NotificationFeedPopover,
 } from "../";
 
+import "../theme.css";
+
 export default {
   title: "Feed",
   argTypes: {
