@@ -8,15 +8,13 @@ export type DropdownProps = {
   onChange: (e: any) => void;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ children, value, onChange }) => {
-  return (
-    <div className="rnf-dropdown">
-      <select value={value} onChange={onChange}>
-        {children}
-      </select>
-      <ChevronDown />
-    </div>
-  );
-};
+const Dropdown: React.FC<DropdownProps> = ({ children, value, onChange }) => (
+  <div className="rnf-dropdown">
+    <select value={value} onChange={onChange}>
+      {children}
+    </select>
+    <ChevronDown />
+  </div>
+);
 
 export default Dropdown;

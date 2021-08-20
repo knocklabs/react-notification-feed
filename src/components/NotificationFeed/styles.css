@@ -18,6 +18,7 @@
   background: none;
   appearance: none;
   font-size: var(--rnf-font-size-sm);
+  z-index: 1;
 }
 
 .rnf-dropdown svg {
@@ -25,6 +26,7 @@
   top: 50%;
   margin-top: -2px;
   right: 0;
+  z-index: -1;
 }
 
 /* Mark all as read */
