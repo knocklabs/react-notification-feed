@@ -2,7 +2,7 @@
 
 A set of components for integrating a Knock in-app feed into a React application.
 
-![In-app feed component example](NotificationFeed.png)
+![In-app feed component example](NotificationFeed2.png)
 
 **Note: these components are currently designed to be used in conjunction with the Knock in-app feed
 channel, and via React for web only.**
