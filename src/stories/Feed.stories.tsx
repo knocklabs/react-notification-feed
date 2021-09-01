@@ -67,7 +67,11 @@ const Template: Story<Props> = (args) => {
         <NotificationFeedPopover
           buttonRef={buttonRef}
           isVisible={isVisible}
-          onClose={() => setIsVisible(false)}
+          onClose={(e) => setIsVisible(false)}
+          onNotificationClick={(e) => {
+            // Handle the notification click
+            console.log(e);
+          }}
         />
       </div>
     </KnockFeedProvider>

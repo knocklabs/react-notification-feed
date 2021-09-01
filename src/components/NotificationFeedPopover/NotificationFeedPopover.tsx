@@ -7,17 +7,22 @@ import "./styles.css";
 
 export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
-  onClose: () => void;
+  onClose: (e: Event) => void;
   buttonRef: RefObject<HTMLElement>;
+  closeOnClickOutside?: boolean;
 }
 
 export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = ({
   isVisible,
   onClose,
   buttonRef,
+  closeOnClickOutside = true,
   ...feedProps
 }) => {
-  const { ref: popperRef } = useComponentVisible(isVisible, onClose);
+  const { ref: popperRef } = useComponentVisible(isVisible, onClose, {
+    closeOnClickOutside,
+  });
+
   const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
 
   const { styles, attributes } = usePopper(
