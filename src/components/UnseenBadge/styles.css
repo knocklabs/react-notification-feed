@@ -1,5 +1,5 @@
 :root {
-  --rnf-unseen-badge-bg-color: #dd514c;
+  --rnf-unseen-badge-bg-color: #eb5757;
   --rnf-unseen-badge-size: 16px;
   --rnf-unseed-badge-font-size: 9px;
 }
@@ -22,4 +22,10 @@
   font-weight: var(--rnf-font-weight-medium);
   color: var(--rnf-color-white);
   margin-top: -1px;
+}
+
+/* Themes */
+
+.rnf-unseen-badge--dark {
+  --rnf-unseen-badge-bg-color: #ef3434;
 }

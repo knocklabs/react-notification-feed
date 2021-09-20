@@ -4,6 +4,7 @@ import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
 import useComponentVisible from "../../hooks/useComponentVisible";
 
 import "./styles.css";
+import { useKnockFeed } from "../KnockFeedProvider";
 
 export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
@@ -19,11 +20,10 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
   closeOnClickOutside = true,
   ...feedProps
 }) => {
+  const { colorMode } = useKnockFeed();
   const { ref: popperRef } = useComponentVisible(isVisible, onClose, {
     closeOnClickOutside,
   });
-
-  const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
 
   const { styles, attributes } = usePopper(
     buttonRef.current,
@@ -32,12 +32,6 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
       strategy: "fixed",
       placement: "bottom-end",
       modifiers: [
-        {
-          name: "arrow",
-          options: {
-            element: arrowRef,
-          },
-        },
         {
           name: "offset",
           options: {
@@ -50,18 +44,13 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
 
   return (
     <div
-      className="rnf-notification-feed-popover"
+      className={`rnf-notification-feed-popover rnf-notification-feed-popover--${colorMode}`}
       style={{ ...styles.popper, visibility: isVisible ? "visible" : "hidden" }}
       ref={popperRef}
       {...attributes.popper}
       role="dialog"
       tabIndex={-1}
     >
-      <div
-        className="rnf-notification-feed-popover__arrow"
-        ref={setArrowRef}
-        style={styles.arrow}
-      />
       <div className="rnf-notification-feed-popover__inner">
         <NotificationFeed isVisible={isVisible} {...feedProps} />
       </div>

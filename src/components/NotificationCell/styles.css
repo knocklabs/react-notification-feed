@@ -4,14 +4,17 @@
   --rnf-avatar-initials-font-size: var(--rnf-font-size-md);
   --rnf-avatar-initials-line-height: var(--rnf-font-size-lg);
   --rnf-avatar-initials-color: #fff;
-  --rnf-notification-cell-border-bottom-color: rgba(55, 53, 47, 0.09);
+  --rnf-notification-cell-border-bottom-color: #e4e8ee;
   --rnf-notification-cell-padding: var(--rnf-spacing-3);
   --rnf-notification-cell-active-bg-color: #f1f6fc;
   --rnf-notification-cell-unread-dot-size: 6px;
-  --rnf-notification-cell-unread-dot-bg-color: #f4ada4;
+  --rnf-notification-cell-unread-dot-bg-color: #80c7f5;
+  --rnf-notification-cell-unread-dot-border-color: #3192e3;
   --rnf-notification-cell-content-color: var(--rnf-color-gray-900);
   --rnf-notification-cell-content-font-size: var(--rnf-font-size-sm);
   --rnf-notification-cell-content-line-height: var(--rnf-font-size-lg);
+  --rnf-archive-notification-btn-bg-color: var(--rnf-color-gray-400);
+  --rnf-archive-notification-btn-bg-color-active: var(--rnf-color-gray-500);
 }
 
 /* Avatar */
@@ -47,6 +50,10 @@
   border-bottom: 1px solid var(--rnf-notification-cell-border-bottom-color);
 }
 
+.rnf-notification-cell:last-child {
+  border-bottom-color: transparent;
+}
+
 .rnf-notification-cell__inner {
   background-color: transparent;
   border: none;
@@ -58,6 +65,7 @@
   padding: var(--rnf-notification-cell-padding);
   cursor: pointer;
   text-align: left;
+  justify-content: flex-start;
 }
 
 .rnf-notification-cell__inner:hover,
@@ -75,6 +83,7 @@
   height: var(--rnf-notification-cell-unread-dot-size);
   border-radius: var(--rnf-notification-cell-unread-dot-size);
   background-color: var(--rnf-notification-cell-unread-dot-bg-color);
+  border: 1px solid var(--rnf-notification-cell-unread-dot-border-color);
 }
 
 .rnf-notification-cell__content-outer {
@@ -141,4 +150,72 @@
   font-size: var(--rnf-font-size-sm);
   font-weight: var(--rnf-font-weight-normal);
   line-height: var(--rnf-font-size-lg);
+}
+
+/* Archive button */
+
+.rnf-archive-notification-btn {
+  background-color: transparent;
+  appearance: none;
+  user-select: none;
+  border: none;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: auto;
+  color: var(--rnf-archive-notification-btn-bg-color);
+  padding: var(--rnf-spacing-1) var(--rnf-spacing-2);
+  transition: color 0.1s;
+}
+
+.rnf-notification-cell:hover .rnf-archive-notification-btn,
+.rnf-notification-cell:active .rnf-archive-notification-btn {
+  opacity: 1;
+}
+
+.rnf-archive-notification-btn:hover,
+.rnf-archive-notification-btn:active {
+  color: var(--rnf-archive-notification-btn-bg-color-active);
+}
+
+/* Tooltip */
+
+.rnf-tooltip {
+  background-color: var(--rnf-color-gray-700);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: var(--rnf-spacing-1) var(--rnf-spacing-2);
+  font-size: var(--rnf-font-size-xs);
+  font-weight: var(--rnf-font-weight-medium);
+  transition: opacity 0.3s;
+  z-index: 9999;
+}
+
+/* Themes */
+
+.rnf-notification-cell--dark {
+  --rnf-notification-cell-border-bottom-color: rgba(105, 115, 134, 0.65);
+  --rnf-notification-cell-active-bg-color: #393b40;
+  --rnf-notification-cell-content-color: var(--rnf-color-white-a-75);
+}
+
+.rnf-notification-cell--dark:last-child {
+  border-bottom-color: transparent;
+}
+
+.rnf-notification-cell--dark .rnf-notification-cell__timestamp {
+  color: var(--rnf-color-gray-500);
+}
+
+.rnf-archive-notification-btn--dark {
+  --rnf-archive-notification-btn-bg-color: var(--rnf-color-gray-500);
+  --rnf-archive-notification-btn-bg-color-active: var(--rnf-color-gray-400);
+}
+
+.rnf-tooltip--dark {
+  background-color: #565a61;
 }

@@ -1,5 +1,11 @@
 :root {
-  --rnf-notification-feed-header-height: 42px;
+  --rnf-notification-feed-header-height: 45px;
+}
+
+/* Container */
+.rnf-notification-feed {
+  background-color: var(--rnf-color-white);
+  height: 100%;
 }
 
 /* Dropdown */
@@ -15,10 +21,11 @@
   padding-right: var(--rnf-spacing-3);
   color: currentColor;
   border: none;
-  background: none;
+  background: transparent;
   appearance: none;
   font-size: var(--rnf-font-size-sm);
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .rnf-dropdown svg {
@@ -26,7 +33,7 @@
   top: 50%;
   margin-top: -2px;
   right: 0;
-  z-index: -1;
+  z-index: 1;
 }
 
 /* Mark all as read */
@@ -49,6 +56,7 @@
 }
 
 .rnf-mark-all-as-read svg {
+  margin-top: 1px;
   margin-left: var(--rnf-spacing-1);
 }
 
@@ -79,10 +87,28 @@
 }
 
 .rnf-notification-feed__spinner-container {
-  padding: var(--rnf-spacing-1) var(--rnf-spacing-4);
+  padding: var(--rnf-spacing-3) var(--rnf-spacing-4);
 }
 
 .rnf-notification-feed__spinner-container svg {
   margin: 0 auto;
   display: block;
+}
+
+/* Themes */
+
+.rnf-notification-feed--dark {
+  background-color: #2e2f34;
+}
+
+.rnf-notification-feed--dark .rnf-notification-feed__type {
+  color: var(--rnf-color-white-a-75);
+}
+
+.rnf-dropdown--dark {
+  color: var(--rnf-color-gray-400);
+}
+
+.rnf-mark-all-as-read--dark:disabled {
+  color: var(--rnf-color-gray-500);
 }

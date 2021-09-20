@@ -2,13 +2,14 @@
   --rnf-notification-feed-popover-max-w: 400px;
   --rnf-notification-feed-popover-min-w: 280px;
   --rnf-notification-feed-popover-height: 400px;
-  --rnf-notification-feed-popover-shadow-color: rgba(0, 0, 0, 0.1);
-  --rnf-notification-feed-popover-shadow: 1px 2px 2px
-      var(--rnf-notification-feed-popover-shadow-color),
-    -1px -1px 1px var(--rnf-notification-feed-popover-shadow-color);
+  --rnf-notification-feed-popover-shadow: drop-shadow(
+    0px 5px 15px rgba(0, 0, 0, 0.2)
+  );
+  --rnf-notification-feed-popover-shadow-color: rgba(0, 0, 0, 0.2);
   --rnf-notification-feed-popover-bg-color: #fff;
   --rnf-notification-feed-popover-z-index: 999;
   --rnf-notification-feed-popover-arrow-size: 10px;
+  --rnf-notification-feed-popover-border-radius: 4px;
 }
 
 .rnf-notification-feed-popover {
@@ -16,12 +17,14 @@
   max-width: var(--rnf-notification-feed-popover-max-w);
   min-width: var(--rnf-notification-feed-popover-min-w);
   height: var(--rnf-notification-feed-popover-height);
-  background-color: var(--rnf-notification-feed-popover-bg-color);
-  box-shadow: var(--rnf-notification-feed-popover-shadow);
   z-index: var(--rnf-notification-feed-popover-z-index);
 }
 
 .rnf-notification-feed-popover__inner {
+  overflow: hidden;
+  background-color: var(--rnf-notification-feed-popover-bg-color);
+  border-radius: var(--rnf-notification-feed-popover-border-radius);
+  filter: var(--rnf-notification-feed-popover-shadow);
   height: 100%;
 }
 
@@ -42,4 +45,10 @@
   transform: rotate(45deg);
   width: var(--rnf-notification-feed-popover-arrow-size);
   height: var(--rnf-notification-feed-popover-arrow-size);
+}
+
+/* Theme */
+
+.rnf-notification-feed-popover--dark {
+  --rnf-notification-feed-popover-shadow-color: rgba(0, 0, 0, 0.2);
 }

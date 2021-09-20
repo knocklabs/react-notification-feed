@@ -5,7 +5,7 @@ import { CheckmarkCircle } from "../Icons";
 import "./styles.css";
 
 export const MarkAsRead = () => {
-  const { useFeedStore, feedClient } = useKnockFeed();
+  const { useFeedStore, feedClient, colorMode } = useKnockFeed();
 
   const unreadItems = useFeedStore((state) =>
     state.items.filter((item) => !item.read_at)
@@ -19,7 +19,7 @@ export const MarkAsRead = () => {
 
   return (
     <button
-      className="rnf-mark-all-as-read"
+      className={`rnf-mark-all-as-read rnf-mark-all-as-read--${colorMode}`}
       disabled={unreadCount === 0}
       onClick={onClick}
     >
