@@ -1367,10 +1367,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@knocklabs/client@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.4.4.tgz#0ee9f50e694a094e0feae3fb75f08f7f35c86331"
-  integrity sha512-tD4DUIsx2XgTt1g7sI7ADynIr/kfnCTtALEqQ8/c9EUOGOfocP7YtPtucNyf1OwPUbQtDg/FbKlfEGZc6R1QMg==
+"@knocklabs/client@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.5.0.tgz#ce13f4128eac143fb5d671e43ef9850fe4f0e9d8"
+  integrity sha512-z1lyl07OU7+78TRhAQgqfLGkDKTfIyK/YGnnOBA5VpryRmYC4xZl3l5zC+UZA0MEDxIGq9eskYldL00QCsP+Rw==
   dependencies:
     axios "^0.21.1"
     axios-retry "^3.1.9"
@@ -2322,6 +2322,18 @@
   version "7.0.7"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.7.tgz"
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
+
+"@types/lodash.debounce@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.debounce/-/lodash.debounce-4.0.6.tgz#c5a2326cd3efc46566c47e4c0aa248dc0ee57d60"
+  integrity sha512-4WTmnnhCfDvvuLMaF3KV4Qfki93KebocUF45msxhYyjMttZDQYzHkO639ohhk8+oco2cluAFL3t5+Jn4mleylQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.173"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.173.tgz#9d3b674c67a26cf673756f6aca7b429f237f91ed"
+  integrity sha512-vv0CAYoaEjCw/mLy96GBTnRoZrSxkGE0BKzKimdR8P3OzrNYNvBgtW7p055A+E8C31vXNUhWKoFCbhq7gbyhFg==
 
 "@types/markdown-to-jsx@^6.11.3":
   version "6.11.3"
@@ -6738,7 +6750,7 @@ lodash.camelcase@^4.3.0:
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
-  resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.memoize@^4.1.2:
@@ -8644,6 +8656,15 @@ react-popper-tooltip@^3.1.1:
     "@babel/runtime" "^7.12.5"
     "@popperjs/core" "^2.5.4"
     react-popper "^2.2.4"
+
+react-popper-tooltip@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-popper-tooltip/-/react-popper-tooltip-4.3.0.tgz#07f84d47e36514091f054506a36730769433d439"
+  integrity sha512-t9AYaHwFwnCnhy3FmEYGrerQo7OBYkLHNiiKYFHVJ9kdb7hZrvAdIwIyUDOrdQS0ghXeg1Be1SnPlBeg2XW6nA==
+  dependencies:
+    "@babel/runtime" "^7.14.0"
+    "@popperjs/core" "^2.9.2"
+    react-popper "^2.2.5"
 
 react-popper@^2.2.4, react-popper@^2.2.5:
   version "2.2.5"

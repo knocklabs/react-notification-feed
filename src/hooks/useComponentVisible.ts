@@ -1,22 +1,34 @@
 import { useEffect, useRef } from "react";
 
+function contains(parent: HTMLElement | null, child: HTMLElement) {
+  if (!parent) return false;
+  return parent === child || parent.contains(child);
+}
+
+type Options = {
+  closeOnClickOutside: boolean;
+};
+
 export default function useComponentVisible(
   isVisible: boolean,
-  onClose: () => void
+  onClose: (event: Event) => void,
+  options: Options
 ) {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      onClose();
+      onClose(event);
     }
   };
 
   const handleClickOutside = (event: Event) => {
-    event.stopPropagation();
-
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      onClose();
+    if (
+      options.closeOnClickOutside &&
+      !contains(ref.current, event.target as HTMLElement)
+    ) {
+      event.stopPropagation();
+      onClose(event);
     }
   };
 

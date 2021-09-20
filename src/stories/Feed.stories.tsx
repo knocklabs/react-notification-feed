@@ -7,6 +7,7 @@ import {
 } from "../";
 
 import "../theme.css";
+import { Avatar, NotificationCell } from "../components/NotificationCell";
 
 export default {
   title: "Feed",
@@ -51,6 +52,8 @@ const Template: Story<Props> = (args) => {
   const buttonRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  const colorMode = "dark";
+
   return (
     <KnockFeedProvider
       apiKey={args.apiKey}
@@ -58,8 +61,16 @@ const Template: Story<Props> = (args) => {
       feedId={args.feedId}
       host={args.host}
       tenant={args.tenant}
+      colorMode={colorMode}
     >
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: 10,
+          backgroundColor: colorMode === "dark" ? "#2e2f34" : "transparent",
+        }}
+      >
         <NotificationIconButton
           ref={buttonRef}
           onClick={(e) => setIsVisible(!isVisible)}
@@ -67,7 +78,19 @@ const Template: Story<Props> = (args) => {
         <NotificationFeedPopover
           buttonRef={buttonRef}
           isVisible={isVisible}
-          onClose={() => setIsVisible(false)}
+          onClose={(e) => setIsVisible(false)}
+          renderItem={(props) => (
+            // Example of overriding the avatar rendering and cell rendering
+            <NotificationCell
+              key={props.item.id}
+              item={props.item}
+              avatar={<Avatar name={props.item.actors[0].name} />}
+            />
+          )}
+          onNotificationClick={(e) => {
+            // Handle the notification click
+            console.log(e);
+          }}
         />
       </div>
     </KnockFeedProvider>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import create, { UseStore } from "zustand";
-import { FilterStatus } from "../../constants";
+import { FilterStatus, ColorMode } from "../../constants";
 
 import "./styles.css";
 
@@ -11,6 +11,7 @@ export interface KnockFeedProviderState {
   useFeedStore: UseStore<FeedStoreState>;
   status: FilterStatus;
   setStatus: (status: FilterStatus) => void;
+  colorMode: ColorMode;
 }
 
 const FeedStateContext = React.createContext<KnockFeedProviderState | null>(
@@ -26,6 +27,8 @@ export interface KnockFeedProviderProps {
   // Feed client scoping options
   source?: string;
   tenant?: string;
+  // Extra options
+  colorMode?: ColorMode;
 }
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
@@ -37,6 +40,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   children,
   source,
   tenant,
+  colorMode = "light",
 }) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
@@ -48,7 +52,10 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   }, [apiKey, host, userId, userToken]);
 
   const [feedClient, useFeedStore] = React.useMemo(() => {
-    const feedClient = knock.feeds.initialize(feedId, { source, tenant });
+    const feedClient = knock.feeds.initialize(feedId, {
+      source,
+      tenant,
+    });
     const useFeedStore = create(feedClient.store);
 
     return [feedClient, useFeedStore];
@@ -69,6 +76,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
     useFeedStore,
     status,
     setStatus,
+    colorMode,
   };
 
   return (

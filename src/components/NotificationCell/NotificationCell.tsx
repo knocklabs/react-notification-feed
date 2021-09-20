@@ -1,14 +1,16 @@
-import React, { useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { ContentBlock, FeedItem } from "@knocklabs/client";
-import { formatTimestamp } from "../../utils";
 import { Avatar } from "./Avatar";
+import { ArchiveButton } from "./ArchiveButton";
 import { useKnockFeed } from "../KnockFeedProvider";
+import { formatTimestamp, renderNodeOrFallback } from "../../utils";
 
 import "./styles.css";
 
 export interface NotificationCellProps {
   item: FeedItem;
   onItemClick?: (item: FeedItem) => void;
+  avatar?: ReactNode;
 }
 
 type BlockByName = {
@@ -18,8 +20,8 @@ type BlockByName = {
 export const NotificationCell = React.forwardRef<
   HTMLDivElement,
   NotificationCellProps
->(({ item, onItemClick }, ref) => {
-  const { feedClient } = useKnockFeed();
+>(({ item, onItemClick, avatar }, ref) => {
+  const { feedClient, colorMode } = useKnockFeed();
 
   const blocksByName: BlockByName = useMemo(() => {
     return item.blocks.reduce((acc, block) => {
@@ -40,15 +42,21 @@ export const NotificationCell = React.forwardRef<
     }
   }, [item]);
 
-  const hasActors = item.total_actors > 0;
-  const actor = hasActors && item.actors[0];
+  const actor = item.actors[0];
 
   return (
-    <div ref={ref} className="rnf-notification-cell">
-      <button onClick={onClick} className="rnf-notification-cell__inner">
+    <div
+      ref={ref}
+      className={`rnf-notification-cell rnf-notification-cell--${colorMode}`}
+    >
+      <div onClick={onClick} className="rnf-notification-cell__inner">
         {!item.read_at && <div className="rnf-notification-cell__unread-dot" />}
 
-        {actor && <Avatar name={actor.name} src={(actor as any).avatar} />}
+        {renderNodeOrFallback(
+          avatar,
+          actor && <Avatar name={actor.name} src={actor.avatar} />
+        )}
+
         <div className="rnf-notification-cell__content-outer">
           {blocksByName.body && (
             <div
@@ -61,7 +69,9 @@ export const NotificationCell = React.forwardRef<
             {formatTimestamp(item.inserted_at)}
           </span>
         </div>
-      </button>
+
+        <ArchiveButton item={item} />
+      </div>
     </div>
   );
 });

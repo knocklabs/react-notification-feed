@@ -4,21 +4,26 @@ import { NotificationFeed, NotificationFeedProps } from "../NotificationFeed";
 import useComponentVisible from "../../hooks/useComponentVisible";
 
 import "./styles.css";
+import { useKnockFeed } from "../KnockFeedProvider";
 
 export interface NotificationFeedPopoverProps extends NotificationFeedProps {
   isVisible: boolean;
-  onClose: () => void;
+  onClose: (e: Event) => void;
   buttonRef: RefObject<HTMLElement>;
+  closeOnClickOutside?: boolean;
 }
 
 export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = ({
   isVisible,
   onClose,
   buttonRef,
+  closeOnClickOutside = true,
   ...feedProps
 }) => {
-  const { ref: popperRef } = useComponentVisible(isVisible, onClose);
-  const [arrowRef, setArrowRef] = React.useState<HTMLSpanElement | null>(null);
+  const { colorMode } = useKnockFeed();
+  const { ref: popperRef } = useComponentVisible(isVisible, onClose, {
+    closeOnClickOutside,
+  });
 
   const { styles, attributes } = usePopper(
     buttonRef.current,
@@ -27,12 +32,6 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
       strategy: "fixed",
       placement: "bottom-end",
       modifiers: [
-        {
-          name: "arrow",
-          options: {
-            element: arrowRef,
-          },
-        },
         {
           name: "offset",
           options: {
@@ -45,18 +44,13 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
 
   return (
     <div
-      className="rnf-notification-feed-popover"
+      className={`rnf-notification-feed-popover rnf-notification-feed-popover--${colorMode}`}
       style={{ ...styles.popper, visibility: isVisible ? "visible" : "hidden" }}
       ref={popperRef}
       {...attributes.popper}
       role="dialog"
       tabIndex={-1}
     >
-      <div
-        className="rnf-notification-feed-popover__arrow"
-        ref={setArrowRef}
-        style={styles.arrow}
-      />
       <div className="rnf-notification-feed-popover__inner">
         <NotificationFeed isVisible={isVisible} {...feedProps} />
       </div>

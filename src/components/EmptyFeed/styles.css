@@ -40,3 +40,17 @@
   position: absolute;
   bottom: var(--rnf-spacing-2);
 }
+
+/* Themes */
+
+.rnf-empty-feed--dark .rnf-empty-feed__header {
+  color: var(--rnf-color-white-a-75);
+}
+
+.rnf-empty-feed--dark .rnf-empty-feed__body {
+  color: var(--rnf-color-gray-400);
+}
+
+.rnf-empty-feed--dark .rnf-empty-feed__powered-by-knock {
+  color: var(--rnf-color-gray-500);
+}
