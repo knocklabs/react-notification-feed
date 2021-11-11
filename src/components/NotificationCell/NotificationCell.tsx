@@ -35,12 +35,28 @@ export const NotificationCell = React.forwardRef<
     // Mark as read once we click the item
     feedClient.markAsRead(item);
 
-    if (onItemClick) {
-      onItemClick(item);
-    } else {
+    if (onItemClick) return onItemClick(item);
+
+    // Delay when we navigate, until we've actually issued our API call.
+    setTimeout(() => {
       window.location.assign(actionUrl);
-    }
+    }, 200);
   }, [item]);
+
+  const onKeyDown = React.useCallback(
+    (ev: React.KeyboardEvent<HTMLDivElement>) => {
+      switch (ev.key) {
+        case "Enter": {
+          ev.stopPropagation();
+          onClick();
+          break;
+        }
+        default:
+          break;
+      }
+    },
+    [onClick]
+  );
 
   const actor = item.actors[0];
 
@@ -48,8 +64,11 @@ export const NotificationCell = React.forwardRef<
     <div
       ref={ref}
       className={`rnf-notification-cell rnf-notification-cell--${colorMode}`}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      tabIndex={0}
     >
-      <div onClick={onClick} className="rnf-notification-cell__inner">
+      <div className="rnf-notification-cell__inner">
         {!item.read_at && <div className="rnf-notification-cell__unread-dot" />}
 
         {renderNodeOrFallback(

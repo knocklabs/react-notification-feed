@@ -22,6 +22,7 @@ export interface NotificationFeedProps {
   EmptyComponent?: ReactNode;
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
+  onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
   isVisible: boolean;
 }
 
@@ -33,6 +34,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   EmptyComponent = <EmptyFeed />,
   renderItem = defaultRenderItem,
   onNotificationClick,
+  onMarkAllAsReadClick,
   isVisible = false,
 }) => {
   const {
@@ -102,7 +104,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
             )}
           </Dropdown>
         </div>
-        <MarkAsRead />
+        <MarkAsRead onClick={onMarkAllAsReadClick} />
       </header>
 
       <div className="rnf-notification-feed__container" ref={containerRef}>
