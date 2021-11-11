@@ -46,6 +46,7 @@
 /* Notification cell */
 
 .rnf-notification-cell {
+  background-color: transparent;
   position: relative;
   border-bottom: 1px solid var(--rnf-notification-cell-border-bottom-color);
 }
@@ -54,8 +55,14 @@
   border-bottom-color: transparent;
 }
 
+.rnf-notification-cell:hover,
+.rnf-notification-cell:focus,
+.rnf-notification-cell:active {
+  background-color: var(--rnf-notification-cell-active-bg-color);
+  outline: none;
+}
+
 .rnf-notification-cell__inner {
-  background-color: transparent;
   border: none;
   appearance: none;
   margin: 0;
@@ -66,13 +73,6 @@
   cursor: pointer;
   text-align: left;
   justify-content: flex-start;
-}
-
-.rnf-notification-cell__inner:hover,
-.rnf-notification-cell__inner:focus,
-.rnf-notification-cell__inner:active {
-  background-color: var(--rnf-notification-cell-active-bg-color);
-  outline: none;
 }
 
 .rnf-notification-cell__unread-dot {
@@ -166,16 +166,20 @@
   margin-left: auto;
   color: var(--rnf-archive-notification-btn-bg-color);
   padding: var(--rnf-spacing-1) var(--rnf-spacing-2);
-  transition: color 0.1s;
+  transition: color 0.1s ease-in-out, opacity 0.2s ease-in-out;
 }
 
+.rnf-notification-cell:focus .rnf-archive-notification-btn,
 .rnf-notification-cell:hover .rnf-archive-notification-btn,
 .rnf-notification-cell:active .rnf-archive-notification-btn {
   opacity: 1;
 }
 
+.rnf-archive-notification-btn:focus,
 .rnf-archive-notification-btn:hover,
 .rnf-archive-notification-btn:active {
+  outline: none;
+  opacity: 1;
   color: var(--rnf-archive-notification-btn-bg-color-active);
 }
 
@@ -190,6 +194,7 @@
   flex-direction: column;
   padding: var(--rnf-spacing-1) var(--rnf-spacing-2);
   font-size: var(--rnf-font-size-xs);
+  line-height: var(--rnf-font-size-s);
   font-weight: var(--rnf-font-weight-medium);
   transition: opacity 0.3s;
   z-index: 9999;
