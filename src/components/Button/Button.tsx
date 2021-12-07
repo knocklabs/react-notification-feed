@@ -1,6 +1,5 @@
 import React from "react";
 import { useKnockFeed } from "../KnockFeedProvider";
-import { Spinner } from "../Spinner";
 import { ButtonSpinner } from "./ButtonSpinner";
 
 import "./styles.css";
@@ -33,7 +32,10 @@ export const Button: React.FC<ButtonProps> = ({
     `rnf-button--${colorMode}`,
   ].join(" ");
 
-  const showWhileLoading = loadingText || (
+  // In this case when there's no loading text, we still want to display the original
+  // content of the button, but make it hidden. That allows us to keep the button width
+  // consistent and show the spinner in the middle, meaning no layout shift.
+  const textToShowWhileLoading = loadingText || (
     <span className="rnf-button__button-text-hidden">{children}</span>
   );
 
@@ -43,8 +45,8 @@ export const Button: React.FC<ButtonProps> = ({
       className={classNames}
       disabled={isLoading || isDisabled}
     >
-      {isLoading && <ButtonSpinner label={loadingText} />}
-      {isLoading ? showWhileLoading : children}
+      {isLoading && <ButtonSpinner hasLabel={!!loadingText} />}
+      {isLoading ? textToShowWhileLoading : children}
     </button>
   );
 };

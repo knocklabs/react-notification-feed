@@ -4,13 +4,13 @@ import { Spinner } from "../Spinner";
 import "./styles.css";
 
 type ButtonSpinnerProps = {
-  label?: string;
+  hasLabel: boolean;
 };
 
-export const ButtonSpinner: React.FC<ButtonSpinnerProps> = ({ label }) => (
+export const ButtonSpinner: React.FC<ButtonSpinnerProps> = ({ hasLabel }) => (
   <div
     className={`rnf-button-spinner rnf-button-spinner--${
-      label ? "with-label" : "without-label"
+      hasLabel ? "with-label" : "without-label"
     }`}
   >
     <Spinner />
