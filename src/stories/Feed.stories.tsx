@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Story, Meta } from "@storybook/react";
 import {
+  Button,
   KnockFeedProvider,
   NotificationIconButton,
   NotificationFeedPopover,
+  ButtonGroup,
 } from "../";
 
 import "../theme.css";
@@ -85,7 +87,19 @@ const Template: Story<Props> = (args) => {
               key={props.item.id}
               item={props.item}
               avatar={<Avatar name={props.item.actors[0].name} />}
-            />
+            >
+              {props.item.source.key === "new-comment-1" && (
+                <Button
+                  variant="primary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.alert("Approve!");
+                  }}
+                >
+                  Accept
+                </Button>
+              )}
+            </NotificationCell>
           )}
           onNotificationClick={(e) => {
             // Handle the notification click

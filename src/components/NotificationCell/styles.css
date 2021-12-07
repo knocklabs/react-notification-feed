@@ -152,6 +152,10 @@
   line-height: var(--rnf-font-size-lg);
 }
 
+.rnf-notification-cell__child-content {
+  margin: 0.75em 0 0.5em 0;
+}
+
 /* Archive button */
 
 .rnf-archive-notification-btn {

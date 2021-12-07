@@ -11,6 +11,7 @@ export interface NotificationCellProps {
   item: FeedItem;
   onItemClick?: (item: FeedItem) => void;
   avatar?: ReactNode;
+  children?: ReactNode;
 }
 
 type BlockByName = {
@@ -20,7 +21,7 @@ type BlockByName = {
 export const NotificationCell = React.forwardRef<
   HTMLDivElement,
   NotificationCellProps
->(({ item, onItemClick, avatar }, ref) => {
+>(({ item, onItemClick, avatar, children }, ref) => {
   const { feedClient, colorMode } = useKnockFeed();
 
   const blocksByName: BlockByName = useMemo(() => {
@@ -82,6 +83,12 @@ export const NotificationCell = React.forwardRef<
               className="rnf-notification-cell__content"
               dangerouslySetInnerHTML={{ __html: blocksByName.body.rendered }}
             />
+          )}
+
+          {children && (
+            <div className="rnf-notification-cell__child-content">
+              {children}
+            </div>
           )}
 
           <span className="rnf-notification-cell__timestamp">
