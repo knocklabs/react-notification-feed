@@ -89,15 +89,26 @@ const Template: Story<Props> = (args) => {
               avatar={<Avatar name={props.item.actors[0].name} />}
             >
               {props.item.source.key === "new-comment-1" && (
-                <Button
-                  variant="primary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.alert("Approve!");
-                  }}
-                >
-                  Accept
-                </Button>
+                <ButtonGroup>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.alert("Approve!");
+                    }}
+                  >
+                    Accept
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.alert("Reject!");
+                    }}
+                  >
+                    Reject
+                  </Button>
+                </ButtonGroup>
               )}
             </NotificationCell>
           )}
