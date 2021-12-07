@@ -51,6 +51,9 @@
   --rnf-color-gray-300: #a5acb8;
   --rnf-color-gray-200: #dddee1;
   --rnf-color-gray-100: #e4e8ee;
+  --rnf-color-brand-500: #e95744;
+  --rnf-color-brand-700: #e4321b;
+  --rnf-color-brand-900: #891e10;
 
   /* Component specific colors */
   --rnf-unread-badge-bg-color: #dd514c;
