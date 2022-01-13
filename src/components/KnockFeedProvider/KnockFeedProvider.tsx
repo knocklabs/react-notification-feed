@@ -2,8 +2,7 @@ import * as React from "react";
 import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import create, { UseStore } from "zustand";
 import { FilterStatus, ColorMode } from "../../constants";
-
-import "./styles.css";
+import { KnockFeedContainer } from "./KnockFeedContainer";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -29,6 +28,7 @@ export interface KnockFeedProviderProps {
   tenant?: string;
   // Extra options
   colorMode?: ColorMode;
+  rootless?: boolean;
 }
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
@@ -41,6 +41,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   source,
   tenant,
   colorMode = "light",
+  rootless,
 }) => {
   const [status, setStatus] = React.useState(FilterStatus.All);
 
@@ -79,9 +80,13 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
     colorMode,
   };
 
+  const content = rootless
+    ? children
+    : <KnockFeedContainer>{children}</KnockFeedContainer>;
+
   return (
     <FeedStateContext.Provider value={state}>
-      <div className="rnf-feed-provider">{children}</div>
+      {content}
     </FeedStateContext.Provider>
   );
 };
