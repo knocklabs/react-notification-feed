@@ -56,6 +56,8 @@ const YourAppLayout = () => {
       userToken={currentUser.knockUserToken}
       // Optionally you can scope the feed in a particular manner
       // tenant={currentWorkspace.id}
+      // Optionally you can stop the provider rendering any markup and use `KnockFeedContainer` to wrap components
+      // rootless
     >
       <NotificationIconButton
         ref={notifButtonRef}

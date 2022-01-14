@@ -12,6 +12,7 @@ export interface NotificationCellProps {
   onItemClick?: (item: FeedItem) => void;
   avatar?: ReactNode;
   children?: ReactNode;
+  archiveButton?: ReactNode;
 }
 
 type BlockByName = {
@@ -21,7 +22,7 @@ type BlockByName = {
 export const NotificationCell = React.forwardRef<
   HTMLDivElement,
   NotificationCellProps
->(({ item, onItemClick, avatar, children }, ref) => {
+>(({ item, onItemClick, avatar, children, archiveButton }, ref) => {
   const { feedClient, colorMode } = useKnockFeed();
 
   const blocksByName: BlockByName = useMemo(() => {
@@ -96,7 +97,10 @@ export const NotificationCell = React.forwardRef<
           </span>
         </div>
 
-        <ArchiveButton item={item} />
+        {renderNodeOrFallback(
+          archiveButton,
+          <ArchiveButton item={item} />
+        )}
       </div>
     </div>
   );
