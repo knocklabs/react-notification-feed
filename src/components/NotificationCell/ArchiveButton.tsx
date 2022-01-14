@@ -1,7 +1,7 @@
 import { FeedItem } from "@knocklabs/client";
 import React, { MouseEvent, useCallback } from "react";
 import { usePopperTooltip } from "react-popper-tooltip";
-import { CloseCircle } from "../Icons/CloseCircle";
+import { CloseCircle } from "../Icons";
 import { useKnockFeed } from "../KnockFeedProvider";
 
 export interface ArchiveButtonProps {
