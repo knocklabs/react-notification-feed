@@ -97,10 +97,7 @@ export const NotificationCell = React.forwardRef<
           </span>
         </div>
 
-        {renderNodeOrFallback(
-          archiveButton,
-          <ArchiveButton item={item} />
-        )}
+        {renderNodeOrFallback(archiveButton, <ArchiveButton item={item} />)}
       </div>
     </div>
   );
