@@ -95,7 +95,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
         <div className="rnf-notification-feed__selector">
           <span className="rnf-notification-feed__type">Notifications</span>
           <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
-            {[FilterStatus.All, FilterStatus.Unread, FilterStatus.Unseen].map(
+            {[FilterStatus.All, FilterStatus.Unread, FilterStatus.Read].map(
               (state) => (
                 <option key={state} value={state}>
                   {FilterStatusToLabel[state]}

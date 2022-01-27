@@ -1,13 +1,13 @@
 export enum FilterStatus {
   All = "all",
+  Read = "read",
   Unread = "unread",
-  Unseen = "unseen",
 }
 
 export const FilterStatusToLabel = {
   [FilterStatus.All]: "All",
   [FilterStatus.Unread]: "Unread",
-  [FilterStatus.Unseen]: "Unseen",
+  [FilterStatus.Read]: "Read",
 };
 
 export type ColorMode = "light" | "dark";
