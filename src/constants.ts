@@ -1,6 +1,7 @@
 export enum FilterStatus {
   All = "all",
   Read = "read",
+  Unseen = "unseen",
   Unread = "unread",
 }
 

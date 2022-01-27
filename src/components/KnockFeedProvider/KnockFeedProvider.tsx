@@ -80,9 +80,11 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
     colorMode,
   };
 
-  const content = rootless
-    ? children
-    : <KnockFeedContainer>{children}</KnockFeedContainer>;
+  const content = rootless ? (
+    children
+  ) : (
+    <KnockFeedContainer>{children}</KnockFeedContainer>
+  );
 
   return (
     <FeedStateContext.Provider value={state}>
