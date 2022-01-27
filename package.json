@@ -1,6 +1,6 @@
 {
   "name": "@knocklabs/react-notification-feed",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "A set of React components to render feeds powered by Knock",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
