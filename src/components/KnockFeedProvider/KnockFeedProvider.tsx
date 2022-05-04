@@ -23,6 +23,7 @@ export interface KnockFeedProviderProps {
   userToken?: string;
   feedId: string;
   host?: string;
+  children?: React.ReactElement;
   // Feed client scoping options
   source?: string;
   tenant?: string;
