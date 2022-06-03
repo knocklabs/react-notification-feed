@@ -32,6 +32,8 @@ export interface KnockFeedProviderProps {
   rootless?: boolean;
 }
 
+type teardownRefCallback = () => void;
+
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   apiKey,
   userId,
@@ -44,29 +46,39 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   colorMode = "light",
   rootless,
 }) => {
+  const knockInstance = React.useRef<Knock | null>(null);
+  const feedTeardownRef = React.useRef<teardownRefCallback | null>(null);
   const [status, setStatus] = React.useState(FilterStatus.All);
 
   const knock = React.useMemo(() => {
+    // Cleanup any existing knock instances (if they exist)
+    if (knockInstance.current) {
+      knockInstance.current.teardown();
+    }
+
     const knock = new Knock(apiKey, { host });
     knock.authenticate(userId, userToken);
+    knockInstance.current = knock;
 
     return knock;
   }, [apiKey, host, userId, userToken]);
 
   const [feedClient, useFeedStore] = React.useMemo(() => {
+    // If we have a feed instance already, tear it down
+    if (feedTeardownRef.current) {
+      feedTeardownRef.current();
+    }
+
     const feedClient = knock.feeds.initialize(feedId, {
       source,
       tenant,
     });
     const useFeedStore = create(feedClient.store);
+    const teardown = feedClient.listenForUpdates();
+    feedTeardownRef.current = teardown;
 
     return [feedClient, useFeedStore];
   }, [knock, feedId, source, tenant]);
-
-  React.useEffect(() => {
-    feedClient.listenForUpdates();
-    return () => knock.teardown();
-  }, [feedClient]);
 
   React.useEffect(() => {
     feedClient.fetch({ status });
