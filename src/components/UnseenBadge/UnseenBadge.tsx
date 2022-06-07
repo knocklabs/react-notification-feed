@@ -11,8 +11,11 @@ export type UnseenBadgeProps = {
   badgeCountType?: BadgeCountType;
 };
 
-function selectBadgeCount(badgeCount: BadgeCountType, metadata: FeedMetadata) {
-  switch (badgeCount) {
+function selectBadgeCount(
+  badgeCountType: BadgeCountType,
+  metadata: FeedMetadata
+) {
+  switch (badgeCountType) {
     case "all":
       return metadata.total_count;
     case "unread":

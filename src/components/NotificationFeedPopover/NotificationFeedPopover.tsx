@@ -85,7 +85,7 @@ export const NotificationFeedPopover: React.FC<NotificationFeedPopoverProps> = (
       tabIndex={-1}
     >
       <div className="rnf-notification-feed-popover__inner">
-        <NotificationFeed isVisible={isVisible} {...feedProps} />
+        <NotificationFeed {...feedProps} />
       </div>
     </div>
   );
