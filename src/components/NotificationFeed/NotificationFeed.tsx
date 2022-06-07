@@ -1,4 +1,9 @@
-import { FeedItem, isRequestInFlight, NetworkStatus } from "@knocklabs/client";
+import {
+  Feed,
+  FeedItem,
+  isRequestInFlight,
+  NetworkStatus,
+} from "@knocklabs/client";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { EmptyFeed } from "../EmptyFeed";
 import { useKnockFeed } from "../KnockFeedProvider";
@@ -23,7 +28,7 @@ export interface NotificationFeedProps {
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
-  isVisible: boolean;
+  isVisible?: boolean;
 }
 
 const defaultRenderItem = (props: RenderItemProps) => (
@@ -35,7 +40,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   renderItem = defaultRenderItem,
   onNotificationClick,
   onMarkAllAsReadClick,
-  isVisible = false,
 }) => {
   const {
     status,
@@ -48,9 +52,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   const pageInfo = useFeedStore((state) => state.pageInfo);
   const items = useFeedStore((state) => state.items);
   const networkStatus = useFeedStore((state) => state.networkStatus);
-  const unseenItems = useFeedStore((state) =>
-    state.items.filter((item) => !item.seen_at)
-  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const noItems = items.length === 0;
@@ -70,12 +71,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     callback: onBottomCallback,
     offset: 70,
   });
-
-  useEffect(() => {
-    if (isVisible && unseenItems.length > 0) {
-      feedClient.markAsSeen(unseenItems);
-    }
-  }, [isVisible]);
 
   const renderSpinner = () => (
     <div className="rnf-notification-feed__spinner-container">

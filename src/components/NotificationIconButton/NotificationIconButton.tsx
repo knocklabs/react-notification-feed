@@ -1,18 +1,20 @@
 import React, { SyntheticEvent } from "react";
 import { BellIcon } from "../Icons";
 import { useKnockFeed } from "../KnockFeedProvider";
-import { UnseenBadge } from "../UnseenBadge";
+import { BadgeCountType, UnseenBadge } from "../UnseenBadge";
 
 import "./styles.css";
 
 export interface NotificationIconButtonProps {
+  // What value should we use to drive the badge count?
+  badgeCountType?: BadgeCountType;
   onClick: (e: SyntheticEvent) => void;
 }
 
 export const NotificationIconButton = React.forwardRef<
   HTMLButtonElement,
   NotificationIconButtonProps
->(({ onClick }, ref) => {
+>(({ onClick, badgeCountType }, ref) => {
   const { colorMode } = useKnockFeed();
 
   return (
@@ -22,7 +24,7 @@ export const NotificationIconButton = React.forwardRef<
       onClick={onClick}
     >
       <BellIcon />
-      <UnseenBadge />
+      <UnseenBadge badgeCountType={badgeCountType} />
     </button>
   );
 });
