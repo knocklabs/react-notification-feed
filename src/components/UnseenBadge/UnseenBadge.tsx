@@ -3,15 +3,40 @@ import { useKnockFeed } from "../KnockFeedProvider";
 import { formatBadgeCount } from "../../utils";
 
 import "./styles.css";
+import { FeedMetadata } from "@knocklabs/client";
 
-export const UnseenBadge = () => {
+export type BadgeCountType = "unseen" | "unread" | "all";
+
+export type UnseenBadgeProps = {
+  badgeCountType?: BadgeCountType;
+};
+
+function selectBadgeCount(
+  badgeCountType: BadgeCountType,
+  metadata: FeedMetadata
+) {
+  switch (badgeCountType) {
+    case "all":
+      return metadata.total_count;
+    case "unread":
+      return metadata.unread_count;
+    case "unseen":
+      return metadata.unseen_count;
+  }
+}
+
+export const UnseenBadge: React.FC<UnseenBadgeProps> = ({
+  badgeCountType = "unseen",
+}) => {
   const { useFeedStore } = useKnockFeed();
-  const unseenCount = useFeedStore((state) => state.metadata.unseen_count);
+  const badgeCountValue = useFeedStore((state) =>
+    selectBadgeCount(badgeCountType, state.metadata)
+  );
 
-  return unseenCount !== 0 ? (
+  return badgeCountValue !== 0 ? (
     <div className="rnf-unseen-badge">
       <span className="rnf-unseen-badge__count">
-        {formatBadgeCount(unseenCount)}
+        {formatBadgeCount(badgeCountValue)}
       </span>
     </div>
   ) : null;

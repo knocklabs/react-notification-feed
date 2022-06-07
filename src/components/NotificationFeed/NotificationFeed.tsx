@@ -1,4 +1,9 @@
-import { FeedItem, isRequestInFlight, NetworkStatus } from "@knocklabs/client";
+import {
+  Feed,
+  FeedItem,
+  isRequestInFlight,
+  NetworkStatus,
+} from "@knocklabs/client";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { EmptyFeed } from "../EmptyFeed";
 import { useKnockFeed } from "../KnockFeedProvider";
@@ -6,7 +11,7 @@ import { Spinner } from "../Spinner";
 import { NotificationCell } from "../NotificationCell";
 import { MarkAsRead } from "./MarkAsRead";
 import Dropdown from "./Dropdown";
-import { FilterStatus, FilterStatusToLabel } from "../../constants";
+import { ColorMode, FilterStatus, FilterStatusToLabel } from "../../constants";
 
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
@@ -23,11 +28,20 @@ export interface NotificationFeedProps {
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
-  isVisible: boolean;
 }
 
 const defaultRenderItem = (props: RenderItemProps) => (
   <NotificationCell key={props.item.id} {...props} />
+);
+
+const LoadingSpinner = ({ colorMode }: { colorMode: ColorMode }) => (
+  <div className="rnf-notification-feed__spinner-container">
+    <Spinner
+      thickness={3}
+      size="16px"
+      color={colorMode === "dark" ? "rgba(255, 255, 255, 0.65)" : undefined}
+    />
+  </div>
 );
 
 export const NotificationFeed: React.FC<NotificationFeedProps> = ({
@@ -35,7 +49,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   renderItem = defaultRenderItem,
   onNotificationClick,
   onMarkAllAsReadClick,
-  isVisible = false,
 }) => {
   const {
     status,
@@ -48,9 +61,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   const pageInfo = useFeedStore((state) => state.pageInfo);
   const items = useFeedStore((state) => state.items);
   const networkStatus = useFeedStore((state) => state.networkStatus);
-  const unseenItems = useFeedStore((state) =>
-    state.items.filter((item) => !item.seen_at)
-  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const noItems = items.length === 0;
@@ -70,22 +80,6 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     callback: onBottomCallback,
     offset: 70,
   });
-
-  useEffect(() => {
-    if (isVisible && unseenItems.length > 0) {
-      feedClient.markAsSeen(unseenItems);
-    }
-  }, [isVisible]);
-
-  const renderSpinner = () => (
-    <div className="rnf-notification-feed__spinner-container">
-      <Spinner
-        thickness={3}
-        size="16px"
-        color={colorMode === "dark" ? "rgba(255, 255, 255, 0.65)" : undefined}
-      />
-    </div>
-  );
 
   return (
     <div
@@ -108,7 +102,9 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
       </header>
 
       <div className="rnf-notification-feed__container" ref={containerRef}>
-        {networkStatus === NetworkStatus.loading && renderSpinner()}
+        {networkStatus === NetworkStatus.loading && (
+          <LoadingSpinner colorMode={colorMode} />
+        )}
 
         <div className="rnf-notification-feed__feed-items-container">
           {networkStatus !== NetworkStatus.loading &&
@@ -117,7 +113,9 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
             )}
         </div>
 
-        {networkStatus === NetworkStatus.fetchMore && renderSpinner()}
+        {networkStatus === NetworkStatus.fetchMore && (
+          <LoadingSpinner colorMode={colorMode} />
+        )}
 
         {!requestInFlight && noItems && EmptyComponent}
       </div>

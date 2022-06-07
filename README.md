@@ -7,6 +7,8 @@ A set of components for integrating a Knock in-app feed into a React application
 **Note: these components are currently designed to be used in conjunction with the Knock in-app feed
 channel, and via React for web only.**
 
+[Full documentation](https://docs.knock.app/in-app-ui/react/overview)
+
 ## Installation
 
 Via NPM:
@@ -52,27 +54,19 @@ const YourAppLayout = () => {
       apiKey={process.env.KNOCK_PUBLIC_API_KEY}
       feedId={process.env.KNOCK_FEED_ID}
       userId={currentUser.id}
-      // Optional in non production environments
-      userToken={currentUser.knockUserToken}
-      // Optionally you can scope the feed in a particular manner
-      // tenant={currentWorkspace.id}
-      // Optionally you can stop the provider rendering any markup and use `KnockFeedContainer` to wrap components
-      // rootless
     >
-      <NotificationIconButton
-        ref={notifButtonRef}
-        onClick={(e) => setIsVisible(!isVisible)}
-      />
-      <NotificationFeedPopover
-        buttonRef={notifButtonRef}
-        isVisible={isVisible}
-        onClose={() => setIsVisible(false)}
-      />
+      <>
+        <NotificationIconButton
+          ref={notifButtonRef}
+          onClick={(e) => setIsVisible(!isVisible)}
+        />
+        <NotificationFeedPopover
+          buttonRef={notifButtonRef}
+          isVisible={isVisible}
+          onClose={() => setIsVisible(false)}
+        />
+      </>
     </KnockFeedProvider>
   );
 };
 ```
-
-## Customizing
-
-See the [documentation](https://docs.knock.app/notification-feeds/customizing-ui) to customize the feed for your application.
