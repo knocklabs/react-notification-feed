@@ -59,19 +59,11 @@ const YourAppLayout = () => {
         <NotificationIconButton
           ref={notifButtonRef}
           onClick={(e) => setIsVisible(!isVisible)}
-          badgeCountType="unread"
         />
         <NotificationFeedPopover
           buttonRef={notifButtonRef}
           isVisible={isVisible}
           onClose={() => setIsVisible(false)}
-          onOpen={({ store, feedClient }) => {
-            const unreadItems = store.items.filter((item) => !item.read_at);
-
-            if (unreadItems.length > 0) {
-              feedClient.markAsRead(unreadItems);
-            }
-          }}
         />
       </>
     </KnockFeedProvider>
