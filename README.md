@@ -1,6 +1,8 @@
 # React notification feed
 
-A set of components for integrating a Knock in-app feed into a React application.
+A set of components for integrating a Knock in-app feed into a React application. 
+
+[See a live demo](https://knock-in-app-notifications-react.vercel.app/)
 
 ![In-app feed component example](NotificationFeed2.png)
 
