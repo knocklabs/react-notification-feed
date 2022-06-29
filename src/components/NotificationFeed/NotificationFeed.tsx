@@ -4,7 +4,13 @@ import {
   isRequestInFlight,
   NetworkStatus,
 } from "@knocklabs/client";
-import React, { ReactNode, useCallback, useEffect, useRef } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { EmptyFeed } from "../EmptyFeed";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { Spinner } from "../Spinner";
@@ -50,19 +56,16 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   onNotificationClick,
   onMarkAllAsReadClick,
 }) => {
-  const {
-    status,
-    setStatus,
-    feedClient,
-    useFeedStore,
-    colorMode,
-  } = useKnockFeed();
+  const [status, setStatus] = useState(FilterStatus.All);
+  const { feedClient, useFeedStore, colorMode } = useKnockFeed();
 
-  const pageInfo = useFeedStore((state) => state.pageInfo);
-  const items = useFeedStore((state) => state.items);
-  const networkStatus = useFeedStore((state) => state.networkStatus);
-
+  const { pageInfo, items, networkStatus } = useFeedStore();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    feedClient.fetch({ status });
+  }, [status]);
+
   const noItems = items.length === 0;
   const requestInFlight = isRequestInFlight(networkStatus);
 
