@@ -12,7 +12,9 @@ function useFeedClient(
     if (feedClientRef.current) feedClientRef.current.teardown();
 
     const feedClient = knock.feeds.initialize(feedId, options);
+
     feedClient.listenForUpdates();
+    feedClientRef.current = feedClient;
 
     return feedClient;
   }, [knock, feedId, options.source, options.tenant]);

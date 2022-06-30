@@ -1,10 +1,12 @@
 import * as React from "react";
 import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
-import create, { UseStore } from "zustand";
+import create, { StoreApi, UseStore } from "zustand";
+
 import { ColorMode } from "../../constants";
-import { KnockFeedContainer } from "./KnockFeedContainer";
 import useAuthenticatedKnockClient from "../../hooks/useAuthenticatedKnockClient";
 import useFeedClient from "../../hooks/useFeedClient";
+import { feedProviderKey } from "../../utils";
+import { KnockFeedContainer } from "./KnockFeedContainer";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -61,10 +63,11 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
 
   return (
     <FeedStateContext.Provider
+      key={feedProviderKey(feedId, { tenant, source })}
       value={{
         knock,
         feedClient,
-        useFeedStore: create(feedClient.store),
+        useFeedStore: create(feedClient.store as StoreApi<FeedStoreState>),
         colorMode,
       }}
     >

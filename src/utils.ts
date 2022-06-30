@@ -22,3 +22,16 @@ export function toSentenceCase(string: string): string {
 export function renderNodeOrFallback(node: ReactNode, fallback: ReactNode) {
   return node !== undefined ? node : fallback;
 }
+
+/*
+  Used to build a consistent key for the KnockFeedProvider so that React knows when
+  to trigger a re-render of the context when a key property changes.
+*/
+export function feedProviderKey(
+  userFeedId: string,
+  options: { source?: string; tenant?: string } = {}
+) {
+  return [userFeedId, options.source, options.tenant]
+    .filter((f) => !!f)
+    .join("-");
+}

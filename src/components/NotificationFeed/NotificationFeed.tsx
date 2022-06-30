@@ -63,8 +63,9 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // When the feed client changes, or the status changes issue a re-fetch
     feedClient.fetch({ status });
-  }, [status]);
+  }, [feedClient, status]);
 
   const noItems = items.length === 0;
   const requestInFlight = isRequestInFlight(networkStatus);
