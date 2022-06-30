@@ -1,15 +1,15 @@
 import * as React from "react";
 import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
 import create, { UseStore } from "zustand";
-import { FilterStatus, ColorMode } from "../../constants";
+import { ColorMode } from "../../constants";
 import { KnockFeedContainer } from "./KnockFeedContainer";
+import useAuthenticatedKnockClient from "../../hooks/useAuthenticatedKnockClient";
+import useFeedClient from "../../hooks/useFeedClient";
 
 export interface KnockFeedProviderState {
   knock: Knock;
   feedClient: Feed;
   useFeedStore: UseStore<FeedStoreState>;
-  status: FilterStatus;
-  setStatus: (status: FilterStatus) => void;
   colorMode: ColorMode;
 }
 
@@ -18,80 +18,40 @@ const FeedStateContext = React.createContext<KnockFeedProviderState | null>(
 );
 
 export interface KnockFeedProviderProps {
+  // Knock client props
   apiKey: string;
+  host?: string;
+  // Authentication props
   userId: string;
   userToken?: string;
+  // Feed props
   feedId: string;
-  host?: string;
-  children?: React.ReactElement;
   // Feed client scoping options
   source?: string;
   tenant?: string;
   // Extra options
+  children?: React.ReactElement;
   colorMode?: ColorMode;
   rootless?: boolean;
 }
 
-type teardownRefCallback = () => void;
-
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   apiKey,
-  userId,
-  feedId,
-  userToken,
   host,
+  userId,
+  userToken,
+  feedId,
   children,
   source,
   tenant,
   colorMode = "light",
-  rootless,
+  rootless = false,
 }) => {
-  const knockInstance = React.useRef<Knock | null>(null);
-  const feedTeardownRef = React.useRef<teardownRefCallback | null>(null);
-  const [status, setStatus] = React.useState(FilterStatus.All);
+  const knock = useAuthenticatedKnockClient(apiKey, userId, userToken, {
+    host,
+  });
 
-  const knock = React.useMemo(() => {
-    // Cleanup any existing knock instances (if they exist)
-    if (knockInstance.current) {
-      knockInstance.current.teardown();
-    }
-
-    const knock = new Knock(apiKey, { host });
-    knock.authenticate(userId, userToken);
-    knockInstance.current = knock;
-
-    return knock;
-  }, [apiKey, host, userId, userToken]);
-
-  const [feedClient, useFeedStore] = React.useMemo(() => {
-    // If we have a feed instance already, tear it down
-    if (feedTeardownRef.current) {
-      feedTeardownRef.current();
-    }
-
-    const feedClient = knock.feeds.initialize(feedId, {
-      source,
-      tenant,
-    });
-    const useFeedStore = create(feedClient.store);
-    const teardown = feedClient.listenForUpdates();
-    feedTeardownRef.current = teardown;
-
-    return [feedClient, useFeedStore];
-  }, [knock, feedId, source, tenant]);
-
-  React.useEffect(() => {
-    feedClient.fetch({ status });
-  }, [feedClient, status]);
-
-  const state = {
-    knock,
-    feedClient,
-    useFeedStore,
-    status,
-    setStatus,
-    colorMode,
-  };
+  const feedClient = useFeedClient(knock, feedId, { source, tenant });
 
   const content = rootless ? (
     children
@@ -100,7 +60,14 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   );
 
   return (
-    <FeedStateContext.Provider value={state}>
+    <FeedStateContext.Provider
+      value={{
+        knock,
+        feedClient,
+        useFeedStore: create(feedClient.store),
+        colorMode,
+      }}
+    >
       {content}
     </FeedStateContext.Provider>
   );

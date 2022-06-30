@@ -86,7 +86,7 @@ const Template: Story<Props> = (args) => {
             <NotificationCell
               key={props.item.id}
               item={props.item}
-              avatar={<Avatar name={props.item.actors[0].name} />}
+              avatar={<Avatar name={props.item.actors[0]?.name ?? ""} />}
             >
               {props.item.source.key === "new-comment-1" && (
                 <ButtonGroup>
