@@ -62,7 +62,9 @@ const Template: Story<Props> = (args) => {
       userId={args.userId}
       feedId={args.feedId}
       host={args.host}
-      tenant={args.tenant}
+      defaultFeedOptions={{
+        tenant: args.tenant,
+      }}
       colorMode={colorMode}
     >
       <div

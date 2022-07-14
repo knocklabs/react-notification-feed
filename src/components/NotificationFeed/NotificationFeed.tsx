@@ -1,9 +1,4 @@
-import {
-  Feed,
-  FeedItem,
-  isRequestInFlight,
-  NetworkStatus,
-} from "@knocklabs/client";
+import { FeedItem, isRequestInFlight, NetworkStatus } from "@knocklabs/client";
 import React, {
   ReactNode,
   useCallback,
@@ -34,6 +29,7 @@ export interface NotificationFeedProps {
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
+  initialFilterStatus?: FilterStatus;
 }
 
 const defaultRenderItem = (props: RenderItemProps) => (
@@ -50,17 +46,28 @@ const LoadingSpinner = ({ colorMode }: { colorMode: ColorMode }) => (
   </div>
 );
 
+const OrderedFilterStatuses = [
+  FilterStatus.All,
+  FilterStatus.Unread,
+  FilterStatus.Read,
+];
+
 export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   EmptyComponent = <EmptyFeed />,
   renderItem = defaultRenderItem,
   onNotificationClick,
   onMarkAllAsReadClick,
+  initialFilterStatus = FilterStatus.All,
 }) => {
-  const [status, setStatus] = useState(FilterStatus.All);
+  const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
 
   const { pageInfo, items, networkStatus } = useFeedStore();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setStatus(initialFilterStatus);
+  }, [initialFilterStatus]);
 
   useEffect(() => {
     // When the feed client changes, or the status changes issue a re-fetch
@@ -93,13 +100,11 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
         <div className="rnf-notification-feed__selector">
           <span className="rnf-notification-feed__type">Notifications</span>
           <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
-            {[FilterStatus.All, FilterStatus.Unread, FilterStatus.Read].map(
-              (state) => (
-                <option key={state} value={state}>
-                  {FilterStatusToLabel[state]}
-                </option>
-              )
-            )}
+            {OrderedFilterStatuses.map((filterStatus) => (
+              <option key={filterStatus} value={filterStatus}>
+                {FilterStatusToLabel[filterStatus]}
+              </option>
+            ))}
           </Dropdown>
         </div>
         <MarkAsRead onClick={onMarkAllAsReadClick} />

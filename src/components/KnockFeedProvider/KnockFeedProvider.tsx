@@ -1,10 +1,13 @@
 import * as React from "react";
-import Knock, { Feed, FeedStoreState } from "@knocklabs/client";
+import Knock, {
+  Feed,
+  FeedClientOptions,
+  FeedStoreState,
+} from "@knocklabs/client";
 import create, { StoreApi, UseStore } from "zustand";
 
 import { ColorMode } from "../../constants";
-import useAuthenticatedKnockClient from "../../hooks/useAuthenticatedKnockClient";
-import useFeedClient from "../../hooks/useFeedClient";
+import { useAuthenticatedKnockClient, useFeedClient } from "../../hooks";
 import { feedProviderKey } from "../../utils";
 import { KnockFeedContainer } from "./KnockFeedContainer";
 
@@ -28,13 +31,14 @@ export interface KnockFeedProviderProps {
   userToken?: string;
   // Feed props
   feedId: string;
-  // Feed client scoping options
-  source?: string;
-  tenant?: string;
+
   // Extra options
   children?: React.ReactElement;
   colorMode?: ColorMode;
   rootless?: boolean;
+
+  // Feed client options
+  defaultFeedOptions?: FeedClientOptions;
 }
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
@@ -44,8 +48,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   userToken,
   feedId,
   children,
-  source,
-  tenant,
+  defaultFeedOptions = {},
   colorMode = "light",
   rootless = false,
 }) => {
@@ -53,7 +56,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
     host,
   });
 
-  const feedClient = useFeedClient(knock, feedId, { source, tenant });
+  const feedClient = useFeedClient(knock, feedId, defaultFeedOptions);
 
   const content = rootless ? (
     children
@@ -63,7 +66,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
 
   return (
     <FeedStateContext.Provider
-      key={feedProviderKey(feedId, { tenant, source })}
+      key={feedProviderKey(feedId, defaultFeedOptions)}
       value={{
         knock,
         feedClient,

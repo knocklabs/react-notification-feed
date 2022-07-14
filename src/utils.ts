@@ -1,3 +1,4 @@
+import { FeedClientOptions } from "@knocklabs/client";
 import { parseISO, formatDistance } from "date-fns";
 import { ReactNode } from "react";
 
@@ -29,9 +30,9 @@ export function renderNodeOrFallback(node: ReactNode, fallback: ReactNode) {
 */
 export function feedProviderKey(
   userFeedId: string,
-  options: { source?: string; tenant?: string } = {}
+  options: FeedClientOptions = {}
 ) {
-  return [userFeedId, options.source, options.tenant]
+  return [userFeedId, options.source, options.tenant, options.archived]
     .filter((f) => !!f)
     .join("-");
 }

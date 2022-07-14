@@ -25,6 +25,7 @@
   appearance: none;
   font-size: var(--rnf-font-size-sm);
   position: relative;
+  text-align: right;
   z-index: 2;
 }
 
