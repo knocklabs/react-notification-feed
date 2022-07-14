@@ -1,6 +1,6 @@
 # React notification feed
 
-A set of components for integrating a Knock in-app feed into a React application. 
+A set of components for integrating a Knock in-app feed into a React application.
 
 [See a live demo](https://knock-in-app-notifications-react.vercel.app/)
 
@@ -70,5 +70,38 @@ const YourAppLayout = () => {
       </>
     </KnockFeedProvider>
   );
+};
+```
+
+## Headless usage
+
+Alternatively, if you don't want to use our components you can render the feed in a headless mode using our hooks:
+
+```jsx
+import {
+  useAuthenticatedKnockClient,
+  useNotifications,
+} from "@knocklabs/react-notification-feed";
+import create from "zustand";
+
+const YourAppLayout = () => {
+  const knockClient = useAuthenticatedKnockClient(
+    process.env.KNOCK_PUBLIC_API_KEY,
+    currentUser.id
+  );
+
+  const notificationFeed = useNotifications(
+    knockClient,
+    process.env.KNOCK_FEED_ID
+  );
+
+  const useNotificationStore = create(notificationFeed.store);
+  const { metadata } = useNotificationStore();
+
+  useEffect(() => {
+    notificationFeed.fetch();
+  }, [notificationFeed]);
+
+  return <span>Total unread: {metadata.unread_count}</span>;
 };
 ```

@@ -7,7 +7,7 @@ import Knock, {
 import create, { StoreApi, UseStore } from "zustand";
 
 import { ColorMode } from "../../constants";
-import { useAuthenticatedKnockClient, useFeedClient } from "../../hooks";
+import { useAuthenticatedKnockClient, useNotifications } from "../../hooks";
 import { feedProviderKey } from "../../utils";
 import { KnockFeedContainer } from "./KnockFeedContainer";
 
@@ -56,7 +56,8 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
     host,
   });
 
-  const feedClient = useFeedClient(knock, feedId, defaultFeedOptions);
+  const feedClient = useNotifications(knock, feedId, defaultFeedOptions);
+  const useFeedStore = create(feedClient.store as StoreApi<FeedStoreState>);
 
   const content = rootless ? (
     children
@@ -70,7 +71,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
       value={{
         knock,
         feedClient,
-        useFeedStore: create(feedClient.store as StoreApi<FeedStoreState>),
+        useFeedStore,
         colorMode,
       }}
     >

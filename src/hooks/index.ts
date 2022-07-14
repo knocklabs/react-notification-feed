@@ -1,2 +1,2 @@
 export { default as useAuthenticatedKnockClient } from "./useAuthenticatedKnockClient";
-export { default as useFeedClient } from "./useFeedClient";
+export { default as useNotifications } from "./useNotifications";
