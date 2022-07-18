@@ -9,5 +9,6 @@ export * from "./components/NotificationFeedPopover";
 export * from "./components/NotificationIconButton";
 export * from "./components/Spinner";
 export * from "./components/UnseenBadge";
-export * as utils from "./utils";
 export * from "./constants";
+export * from "./hooks";
+export * as utils from "./utils";

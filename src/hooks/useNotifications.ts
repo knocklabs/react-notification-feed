@@ -1,7 +1,7 @@
 import Knock, { Feed, FeedClientOptions } from "@knocklabs/client";
 import { useMemo, useRef } from "react";
 
-function useFeedClient(
+function useNotifications(
   knock: Knock,
   feedId: string,
   options: FeedClientOptions = {}
@@ -20,4 +20,4 @@ function useFeedClient(
   }, [knock, feedId, options.source, options.tenant]);
 }
 
-export default useFeedClient;
+export default useNotifications;
