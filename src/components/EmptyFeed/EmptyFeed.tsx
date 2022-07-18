@@ -2,13 +2,7 @@ import React from "react";
 import { useKnockFeed } from "../KnockFeedProvider";
 import "./styles.css";
 
-export type EmptyFeedProps = {
-  showPoweredBy?: boolean;
-};
-
-export const EmptyFeed: React.FC<EmptyFeedProps> = ({
-  showPoweredBy = true,
-}) => {
+export const EmptyFeed: React.FC = () => {
   const { colorMode } = useKnockFeed();
 
   return (
@@ -19,16 +13,6 @@ export const EmptyFeed: React.FC<EmptyFeedProps> = ({
           We'll let you know when we've got something new for you.
         </p>
       </div>
-
-      {showPoweredBy && (
-        <a
-          href="https://knock.app?utm_source=in-app-feed&utm_medium=in-app-feed&utm_campaign=in-app-feed"
-          target="_blank"
-          className="rnf-empty-feed__powered-by-knock"
-        >
-          Powered by Knock
-        </a>
-      )}
     </div>
   );
 };
