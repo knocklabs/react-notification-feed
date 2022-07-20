@@ -1,6 +1,6 @@
 # React notification feed
 
-A set of components for integrating a Knock in-app feed into a React application.
+A set of components for integrating [Knock](https://knock.app) in-app notifications into a React application.
 
 [See a live demo](https://knock-in-app-notifications-react.vercel.app/)
 
@@ -105,3 +105,9 @@ const YourAppLayout = () => {
   return <span>Total unread: {metadata.unread_count}</span>;
 };
 ```
+
+## Related links
+
+- [Signup for Knock](https://knock.app)
+- [Knock documentation](https://docs.knock.app)
+- [Knock dashboard](https://dashboard.knock.app)
