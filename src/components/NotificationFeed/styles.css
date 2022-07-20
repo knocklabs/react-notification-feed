@@ -6,6 +6,8 @@
 .rnf-notification-feed {
   background-color: var(--rnf-color-white);
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Dropdown */
@@ -83,8 +85,8 @@
 }
 
 .rnf-notification-feed__container {
-  height: calc(100% - var(--rnf-notification-feed-header-height));
   overflow-y: auto;
+  flex: 1;
 }
 
 .rnf-notification-feed__spinner-container {
@@ -94,6 +96,24 @@
 .rnf-notification-feed__spinner-container svg {
   margin: 0 auto;
   display: block;
+}
+
+/* Knock branding */
+
+.rnf-notification-feed__knock-branding {
+  text-align: center;
+}
+
+.rnf-notification-feed__knock-branding a {
+  display: block;
+  font-size: var(--rnf-font-size-sm);
+  color: var(--rnf-color-gray-500);
+  padding: 6px;
+  border-top: 1px solid var(--rnf-color-gray-100);
+}
+
+.rnf-notification-feed__knock-branding a:hover {
+  background-color: #f1f6fc;
 }
 
 /* Themes */
@@ -112,4 +132,13 @@
 
 .rnf-mark-all-as-read--dark:disabled {
   color: var(--rnf-color-gray-500);
+}
+
+.rnf-notification-feed--dark .rnf-notification-feed__knock-branding a {
+  color: var(--rnf-color-gray-400);
+  border-top-color: rgba(105, 115, 134, 0.65);
+}
+
+.rnf-notification-feed--dark .rnf-notification-feed__knock-branding a:hover {
+  background-color: #393b40;
 }

@@ -16,6 +16,7 @@ import { ColorMode, FilterStatus, FilterStatusToLabel } from "../../constants";
 
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
+import useFeedSettings from "../../hooks/useFeedSettings";
 
 export type OnNotificationClick = (item: FeedItem) => void;
 export type RenderItem = ({ item }: RenderItemProps) => ReactNode;
@@ -52,6 +53,9 @@ const OrderedFilterStatuses = [
   FilterStatus.Read,
 ];
 
+const poweredByKnockUrl =
+  "https://knock.app?utm_source=in-app-feed&utm_medium=in-app&utm_campaign=in-app-branding";
+
 export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   EmptyComponent = <EmptyFeed />,
   renderItem = defaultRenderItem,
@@ -61,6 +65,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
 }) => {
   const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
+  const { settings } = useFeedSettings(feedClient);
 
   const { pageInfo, items, networkStatus } = useFeedStore();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -128,6 +133,14 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
 
         {!requestInFlight && noItems && EmptyComponent}
       </div>
+
+      {settings?.features.branding_required && (
+        <div className="rnf-notification-feed__knock-branding">
+          <a href={poweredByKnockUrl} target="_blank">
+            Powered by Knock
+          </a>
+        </div>
+      )}
     </div>
   );
 };

@@ -32,15 +32,6 @@
   margin: 0;
 }
 
-.rnf-empty-feed__powered-by-knock {
-  font-size: var(--rnf-font-size-xs);
-  font-weight: var(--rnf-font-weight-medium);
-  color: var(--rnf-color-gray-200);
-  text-decoration: none;
-  position: absolute;
-  bottom: var(--rnf-spacing-2);
-}
-
 /* Themes */
 
 .rnf-empty-feed--dark .rnf-empty-feed__header {
@@ -49,8 +40,4 @@
 
 .rnf-empty-feed--dark .rnf-empty-feed__body {
   color: var(--rnf-color-gray-400);
-}
-
-.rnf-empty-feed--dark .rnf-empty-feed__powered-by-knock {
-  color: var(--rnf-color-gray-500);
 }
