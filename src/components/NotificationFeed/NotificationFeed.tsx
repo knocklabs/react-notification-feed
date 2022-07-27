@@ -54,7 +54,7 @@ const OrderedFilterStatuses = [
 ];
 
 const poweredByKnockUrl =
-  "https://knock.app?utm_source=in-app-feed&utm_medium=in-app&utm_campaign=in-app-branding";
+  "https://knock.app?utm_source=powered-by-knock&utm_medium=referral&utm_campaign=knock-branding-feed";
 
 export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   EmptyComponent = <EmptyFeed />,
