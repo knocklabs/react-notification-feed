@@ -10,7 +10,7 @@ export default function getInitials(name: string) {
 
 export interface AvatarProps {
   name: string;
-  src?: string;
+  src?: string | null;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({ name, src }) => {
