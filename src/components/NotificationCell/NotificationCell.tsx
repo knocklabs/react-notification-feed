@@ -75,7 +75,9 @@ export const NotificationCell = React.forwardRef<
 
         {renderNodeOrFallback(
           avatar,
-          actor && <Avatar name={actor.name} src={actor.avatar} />
+          actor && ("name" in actor) && actor.name && (
+            <Avatar name={actor.name} src={actor.avatar} />
+          )
         )}
 
         <div className="rnf-notification-cell__content-outer">
