@@ -17,7 +17,7 @@ function useNotifications(
     feedClientRef.current = feedClient;
 
     return feedClient;
-  }, [knock, feedId, options.source, options.tenant]);
+  }, [knock, feedId, options.source, options.tenant, options.has_tenant, options.archived]);
 }
 
 export default useNotifications;

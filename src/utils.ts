@@ -32,7 +32,7 @@ export function feedProviderKey(
   userFeedId: string,
   options: FeedClientOptions = {}
 ) {
-  return [userFeedId, options.source, options.tenant, options.archived]
-    .filter((f) => !!f)
+  return [userFeedId, options.source, options.tenant, options.has_tenant, options.archived]
+    .filter((f) => f !== null && f !== undefined)
     .join("-");
 }
