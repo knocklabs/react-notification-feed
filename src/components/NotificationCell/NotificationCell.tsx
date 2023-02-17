@@ -34,8 +34,8 @@ export const NotificationCell = React.forwardRef<
   const actionUrl = blocksByName.action_url && blocksByName.action_url.rendered;
 
   const onClick = React.useCallback(() => {
-    // Mark as read once we click the item
-    feedClient.markAsRead(item);
+    // Mark as interacted + read once we click the item
+    feedClient.markAsInteracted(item);
 
     if (onItemClick) return onItemClick(item);
 
