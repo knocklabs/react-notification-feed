@@ -7,6 +7,10 @@ export interface Translations {
   readonly poweredBy: string;
   readonly markAllAsRead: string;
   readonly archiveNotification: string;
+  readonly all: string;
+  readonly unread: string;
+  readonly read: string;
+  readonly unseen: string;
 }
 
 export interface Translation {

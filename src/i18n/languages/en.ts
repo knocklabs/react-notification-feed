@@ -7,6 +7,10 @@ const en: Translation = {
     notifications: "Notifications",
     emptyFeedTitle: "No notifications yet",
     emptyFeedBody: "We'll let you know when we've got something new for you.",
+    all: "All",
+    unread: "Unread",
+    read: "Read",
+    unseen: "Unseen",
   },
   lang: "en",
 };

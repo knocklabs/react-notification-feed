@@ -12,7 +12,7 @@ import { Spinner } from "../Spinner";
 import { NotificationCell } from "../NotificationCell";
 import { MarkAsRead } from "./MarkAsRead";
 import Dropdown from "./Dropdown";
-import { ColorMode, FilterStatus, FilterStatusToLabel } from "../../constants";
+import { ColorMode, FilterStatus } from "../../constants";
 
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
@@ -111,7 +111,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
           <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
             {OrderedFilterStatuses.map((filterStatus) => (
               <option key={filterStatus} value={filterStatus}>
-                {FilterStatusToLabel[filterStatus]}
+                {t(filterStatus)}
               </option>
             ))}
           </Dropdown>
