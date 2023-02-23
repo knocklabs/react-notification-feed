@@ -2,6 +2,7 @@ import * as React from "react";
 import { FeedItem } from "@knocklabs/client";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { CheckmarkCircle } from "../Icons";
+import { useTranslations } from "../../hooks/useTranslations";
 
 import "./styles.css";
 
@@ -11,6 +12,7 @@ export type MarkAsReadProps = {
 
 export const MarkAsRead: React.FC<MarkAsReadProps> = ({ onClick }) => {
   const { useFeedStore, feedClient, colorMode } = useKnockFeed();
+  const { t } = useTranslations();
 
   const unreadItems = useFeedStore((state) =>
     state.items.filter((item) => !item.read_at)
@@ -32,7 +34,7 @@ export const MarkAsRead: React.FC<MarkAsReadProps> = ({ onClick }) => {
       disabled={unreadCount === 0}
       onClick={onClickHandler}
     >
-      Mark all as read
+      {t("markAllAsRead")}
       <CheckmarkCircle />
     </button>
   );

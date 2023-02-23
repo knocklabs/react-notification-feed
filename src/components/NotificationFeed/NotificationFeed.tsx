@@ -17,6 +17,7 @@ import { ColorMode, FilterStatus, FilterStatusToLabel } from "../../constants";
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
 import useFeedSettings from "../../hooks/useFeedSettings";
+import { useTranslations } from "../../hooks/useTranslations";
 
 export type OnNotificationClick = (item: FeedItem) => void;
 export type RenderItem = ({ item }: RenderItemProps) => ReactNode;
@@ -66,6 +67,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
   const { settings } = useFeedSettings(feedClient);
+  const { t } = useTranslations();
 
   const { pageInfo, items, networkStatus } = useFeedStore();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -103,7 +105,9 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     >
       <header className="rnf-notification-feed__header">
         <div className="rnf-notification-feed__selector">
-          <span className="rnf-notification-feed__type">Notifications</span>
+          <span className="rnf-notification-feed__type">
+            {t("notifications")}
+          </span>
           <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
             {OrderedFilterStatuses.map((filterStatus) => (
               <option key={filterStatus} value={filterStatus}>
@@ -137,7 +141,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
       {settings?.features.branding_required && (
         <div className="rnf-notification-feed__knock-branding">
           <a href={poweredByKnockUrl} target="_blank">
-            Powered by Knock
+            {t("poweredBy")}
           </a>
         </div>
       )}
