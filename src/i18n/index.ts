@@ -15,7 +15,7 @@ export interface Translations {
 
 export interface Translation {
   readonly translations: Partial<Translations>;
-  readonly lang: string;
+  readonly locale: string;
 }
 
-export const i18n = { en };
+export const locales = { en };

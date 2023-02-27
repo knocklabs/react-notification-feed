@@ -1,6 +1,6 @@
-import { Translation } from "..";
+import { I18nContent } from "..";
 
-const en: Translation = {
+const en: I18nContent = {
   translations: {
     archiveNotification: "Archive this notification",
     markAllAsRead: "Mark all as read",
@@ -12,7 +12,7 @@ const en: Translation = {
     read: "Read",
     unseen: "Unseen",
   },
-  lang: "en",
+  locale: "en",
 };
 
 export default en;

@@ -11,7 +11,7 @@ import { useAuthenticatedKnockClient, useNotifications } from "../../hooks";
 import { feedProviderKey } from "../../utils";
 import { KnockFeedContainer } from "./KnockFeedContainer";
 import { KnockI18nProvider } from "../KnockI18nProvider";
-import { Translation } from "../../i18n";
+import { I18nContent } from "../../i18n";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -43,7 +43,7 @@ export interface KnockFeedProviderProps {
   defaultFeedOptions?: FeedClientOptions;
 
   // i18n translations
-  i18n?: Translation;
+  i18n?: I18nContent;
 }
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
