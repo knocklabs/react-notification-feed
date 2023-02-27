@@ -1,6 +1,7 @@
 import { FeedItem } from "@knocklabs/client";
 import React, { MouseEvent, useCallback } from "react";
 import { usePopperTooltip } from "react-popper-tooltip";
+import { useTranslations } from "../../hooks/useTranslations";
 import { CloseCircle } from "../Icons";
 import { useKnockFeed } from "../KnockFeedProvider";
 
@@ -10,6 +11,7 @@ export interface ArchiveButtonProps {
 
 const ArchiveButton: React.FC<ArchiveButtonProps> = ({ item }) => {
   const { colorMode, feedClient } = useKnockFeed();
+  const { t } = useTranslations();
 
   const onClick = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
@@ -43,7 +45,7 @@ const ArchiveButton: React.FC<ArchiveButtonProps> = ({ item }) => {
             className: `rnf-tooltip rnf-tooltip--${colorMode}`,
           })}
         >
-          Archive this notification
+          {t("archiveNotification")}
         </div>
       )}
     </button>

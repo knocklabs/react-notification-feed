@@ -1,15 +1,26 @@
 import { FeedClientOptions } from "@knocklabs/client";
-import { parseISO, formatDistance } from "date-fns";
+import { parseISO, formatDistance, Locale } from "date-fns";
 import { ReactNode } from "react";
 
 export function formatBadgeCount(count: number): string | number {
   return count > 9 ? "9+" : count;
 }
 
-export function formatTimestamp(ts: string) {
+type FormatTimestampOptions = {
+  locale?: Locale;
+};
+
+export function formatTimestamp(
+  ts: string,
+  options: FormatTimestampOptions = {}
+) {
   try {
     const parsedTs = parseISO(ts);
-    const formatted = formatDistance(parsedTs, new Date(), { addSuffix: true });
+    const formatted = formatDistance(parsedTs, new Date(), {
+      addSuffix: true,
+      locale: options.locale,
+    });
+
     return formatted;
   } catch (e) {
     return ts;
@@ -32,7 +43,13 @@ export function feedProviderKey(
   userFeedId: string,
   options: FeedClientOptions = {}
 ) {
-  return [userFeedId, options.source, options.tenant, options.has_tenant, options.archived]
+  return [
+    userFeedId,
+    options.source,
+    options.tenant,
+    options.has_tenant,
+    options.archived,
+  ]
     .filter((f) => f !== null && f !== undefined)
     .join("-");
 }

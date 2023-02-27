@@ -6,6 +6,7 @@ import { useKnockFeed } from "../KnockFeedProvider";
 import { formatTimestamp, renderNodeOrFallback } from "../../utils";
 
 import "./styles.css";
+import { useTranslations } from "../../hooks/useTranslations";
 
 export interface NotificationCellProps {
   item: FeedItem;
@@ -24,6 +25,7 @@ export const NotificationCell = React.forwardRef<
   NotificationCellProps
 >(({ item, onItemClick, avatar, children, archiveButton }, ref) => {
   const { feedClient, colorMode } = useKnockFeed();
+  const { dateFnsLocale } = useTranslations();
 
   const blocksByName: BlockByName = useMemo(() => {
     return item.blocks.reduce((acc, block) => {
@@ -75,7 +77,7 @@ export const NotificationCell = React.forwardRef<
 
         {renderNodeOrFallback(
           avatar,
-          actor && ("name" in actor) && actor.name && (
+          actor && "name" in actor && actor.name && (
             <Avatar name={actor.name} src={actor.avatar} />
           )
         )}
@@ -95,7 +97,7 @@ export const NotificationCell = React.forwardRef<
           )}
 
           <span className="rnf-notification-cell__timestamp">
-            {formatTimestamp(item.inserted_at)}
+            {formatTimestamp(item.inserted_at, { locale: dateFnsLocale() })}
           </span>
         </div>
 

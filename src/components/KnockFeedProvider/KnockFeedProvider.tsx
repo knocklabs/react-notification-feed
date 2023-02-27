@@ -10,6 +10,8 @@ import { ColorMode } from "../../constants";
 import { useAuthenticatedKnockClient, useNotifications } from "../../hooks";
 import { feedProviderKey } from "../../utils";
 import { KnockFeedContainer } from "./KnockFeedContainer";
+import { KnockI18nProvider } from "../KnockI18nProvider";
+import { I18nContent } from "../../i18n";
 
 export interface KnockFeedProviderState {
   knock: Knock;
@@ -39,6 +41,9 @@ export interface KnockFeedProviderProps {
 
   // Feed client options
   defaultFeedOptions?: FeedClientOptions;
+
+  // i18n translations
+  i18n?: I18nContent;
 }
 
 export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
@@ -51,6 +56,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
   defaultFeedOptions = {},
   colorMode = "light",
   rootless = false,
+  i18n,
 }) => {
   const knock = useAuthenticatedKnockClient(apiKey, userId, userToken, {
     host,
@@ -75,7 +81,7 @@ export const KnockFeedProvider: React.FC<KnockFeedProviderProps> = ({
         colorMode,
       }}
     >
-      {content}
+      <KnockI18nProvider i18n={i18n}>{content}</KnockI18nProvider>
     </FeedStateContext.Provider>
   );
 };
