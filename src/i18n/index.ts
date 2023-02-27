@@ -13,7 +13,7 @@ export interface Translations {
   readonly unseen: string;
 }
 
-export interface Translation {
+export interface I18nContent {
   readonly translations: Partial<Translations>;
   readonly locale: string;
 }
