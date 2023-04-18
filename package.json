@@ -80,7 +80,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@knocklabs/client": "^0.8.7",
+    "@knocklabs/client": "^0.8.9",
     "@popperjs/core": "^2.9.2",
     "date-fns": "^2.24.0",
     "lodash.debounce": "^4.0.8",
