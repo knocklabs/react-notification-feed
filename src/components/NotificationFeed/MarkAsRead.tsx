@@ -22,7 +22,7 @@ export const MarkAsRead: React.FC<MarkAsReadProps> = ({ onClick }) => {
 
   const onClickHandler = React.useCallback(
     (e: React.MouseEvent) => {
-      feedClient.markAsRead(unreadItems);
+      feedClient.markAllAsRead();
       if (onClick) onClick(e, unreadItems);
     },
     [feedClient, unreadItems, onClick]
