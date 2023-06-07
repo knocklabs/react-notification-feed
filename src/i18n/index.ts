@@ -1,4 +1,5 @@
 import en from "./languages/en";
+import de from "./languages/de";
 
 export interface Translations {
   readonly emptyFeedTitle: string;
@@ -18,4 +19,4 @@ export interface I18nContent {
   readonly locale: string;
 }
 
-export const locales = { en };
+export const locales = { en, de };
