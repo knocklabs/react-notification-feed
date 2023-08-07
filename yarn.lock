@@ -1367,15 +1367,15 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@knocklabs/client@^0.8.9":
-  version "0.8.9"
-  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.8.9.tgz#f72ac7a503ac762ea3ecd82f56f3a6f3cc94eb6a"
-  integrity sha512-TwWb7u8Imu80SmX8GIMkm7zWi4mEGzCoYFc2GBvZLNvRgqgHqlND6mFdmJqSzMtYZqdEy+4CRuvrcHwcYRWb4w==
+"@knocklabs/client@^0.8.10":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@knocklabs/client/-/client-0.8.10.tgz#eae2a9c3fc96c20236aea6e076560cf2097605d9"
+  integrity sha512-vO5MM+od4pa0UxISrndl1jid+Vrhl5Qz0E2VgTf7RI5LC8kRmJ3AeVrEmcYHaHJlmUbyXTMbzgIqCZhgoQ89qA==
   dependencies:
     axios "^0.21.4"
     axios-retry "^3.1.9"
     eventemitter2 "^6.4.5"
-    phoenix "1.5.8"
+    phoenix "1.6.16"
     zustand "^3.7.2"
 
 "@mdx-js/loader@^1.6.22":
@@ -7776,10 +7776,10 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-phoenix@1.5.8:
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/phoenix/-/phoenix-1.5.8.tgz#b411a19e69e21fa45b8c0de8a7a9b1819aff8a2f"
-  integrity sha512-oyWPdegBD8KU7zAs1+P3PRqCEchm973yqoUkdMtU9UhMnB0+PY6diofGOPwkxHrUjw6Whi5GqJMv/3Px2JTlkw==
+phoenix@1.6.16:
+  version "1.6.16"
+  resolved "https://registry.yarnpkg.com/phoenix/-/phoenix-1.6.16.tgz#fd92e87cd0c7cd36a99c6f168beeeb46afde7932"
+  integrity sha512-3vOfu5olbFg6eBNkF4pnwMzNm7unl/4vy24MW+zxKklVgjq1zLnO2EWq9wz6i6r4PbQ0CGxHGtqKJH2VSsnhaA==
 
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.2.3"
