@@ -14,11 +14,8 @@ type OnOpenOptions = {
 };
 
 const defaultOnOpen = ({ store, feedClient }: OnOpenOptions) => {
-  // Find all of the unseen items only
-  const unseenItems = store.items.filter((item) => !item.seen_at);
-
-  if (unseenItems.length > 0) {
-    feedClient.markAsSeen(unseenItems);
+  if (store.metadata.unseen_count > 0) {
+    feedClient.markAllAsSeen();
   }
 };
 
