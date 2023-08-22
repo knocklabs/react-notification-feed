@@ -11,7 +11,8 @@
     "./dist/index.css": "./dist/index.css",
     ".": {
       "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/index.js"
+      "default": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "files": [
