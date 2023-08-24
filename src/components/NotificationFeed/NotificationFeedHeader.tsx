@@ -3,7 +3,7 @@ import { FeedItem } from "@knocklabs/client";
 
 import { FilterStatus } from "../../constants";
 import { useTranslations } from "../../hooks/useTranslations";
-import Dropdown from "./Dropdown";
+import { Dropdown } from "./Dropdown";
 import { MarkAsRead } from "./MarkAsRead";
 
 export type NotificationFeedHeaderProps = {
@@ -18,7 +18,7 @@ const OrderedFilterStatuses = [
   FilterStatus.Read,
 ];
 
-const NotificationFeedHeader: React.FC<NotificationFeedHeaderProps> = ({
+export const NotificationFeedHeader: React.FC<NotificationFeedHeaderProps> = ({
   onMarkAllAsReadClick,
   filterStatus,
   setFilterStatus,
@@ -46,5 +46,3 @@ const NotificationFeedHeader: React.FC<NotificationFeedHeaderProps> = ({
     </header>
   );
 };
-
-export default NotificationFeedHeader;

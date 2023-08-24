@@ -12,14 +12,15 @@ import { useKnockFeed } from "../KnockFeedProvider";
 import { Spinner } from "../Spinner";
 import { NotificationCell } from "../NotificationCell";
 import { ColorMode, FilterStatus } from "../../constants";
+import {
+  NotificationFeedHeader,
+  NotificationFeedHeaderProps,
+} from "./NotificationFeedHeader";
 
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
 import useFeedSettings from "../../hooks/useFeedSettings";
 import { useTranslations } from "../../hooks/useTranslations";
-import NotificationFeedHeader, {
-  NotificationFeedHeaderProps,
-} from "./NotificationFeedHeader";
 
 export type OnNotificationClick = (item: FeedItem) => void;
 export type RenderItem = ({ item }: RenderItemProps) => ReactNode;
