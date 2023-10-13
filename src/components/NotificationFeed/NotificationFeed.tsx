@@ -1,5 +1,6 @@
 import { FeedItem, isRequestInFlight, NetworkStatus } from "@knocklabs/client";
 import React, {
+  ReactElement,
   ReactNode,
   useCallback,
   useEffect,
@@ -10,9 +11,11 @@ import { EmptyFeed } from "../EmptyFeed";
 import { useKnockFeed } from "../KnockFeedProvider";
 import { Spinner } from "../Spinner";
 import { NotificationCell } from "../NotificationCell";
-import { MarkAsRead } from "./MarkAsRead";
-import Dropdown from "./Dropdown";
 import { ColorMode, FilterStatus } from "../../constants";
+import {
+  NotificationFeedHeader,
+  NotificationFeedHeaderProps,
+} from "./NotificationFeedHeader";
 
 import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
@@ -28,6 +31,7 @@ export type RenderItemProps = {
 
 export interface NotificationFeedProps {
   EmptyComponent?: ReactNode;
+  header?: ReactElement<NotificationFeedHeaderProps>;
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
@@ -48,12 +52,6 @@ const LoadingSpinner = ({ colorMode }: { colorMode: ColorMode }) => (
   </div>
 );
 
-const OrderedFilterStatuses = [
-  FilterStatus.All,
-  FilterStatus.Unread,
-  FilterStatus.Read,
-];
-
 const poweredByKnockUrl =
   "https://knock.app?utm_source=powered-by-knock&utm_medium=referral&utm_campaign=knock-branding-feed";
 
@@ -63,6 +61,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   onNotificationClick,
   onMarkAllAsReadClick,
   initialFilterStatus = FilterStatus.All,
+  header = NotificationFeedHeader,
 }) => {
   const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
@@ -103,21 +102,11 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     <div
       className={`rnf-notification-feed rnf-notification-feed--${colorMode}`}
     >
-      <header className="rnf-notification-feed__header">
-        <div className="rnf-notification-feed__selector">
-          <span className="rnf-notification-feed__type">
-            {t("notifications")}
-          </span>
-          <Dropdown value={status} onChange={(e) => setStatus(e.target.value)}>
-            {OrderedFilterStatuses.map((filterStatus) => (
-              <option key={filterStatus} value={filterStatus}>
-                {t(filterStatus)}
-              </option>
-            ))}
-          </Dropdown>
-        </div>
-        <MarkAsRead onClick={onMarkAllAsReadClick} />
-      </header>
+      {React.cloneElement(header as ReactElement<NotificationFeedHeaderProps>, {
+        onMarkAllAsReadClick,
+        filterStatus: status,
+        setFilterStatus: setStatus,
+      })}
 
       <div className="rnf-notification-feed__container" ref={containerRef}>
         {networkStatus === NetworkStatus.loading && (

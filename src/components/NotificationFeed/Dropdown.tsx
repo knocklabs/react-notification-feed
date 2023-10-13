@@ -9,7 +9,11 @@ export type DropdownProps = {
   onChange: (e: any) => void;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ children, value, onChange }) => {
+export const Dropdown: React.FC<DropdownProps> = ({
+  children,
+  value,
+  onChange,
+}) => {
   const { colorMode } = useKnockFeed();
 
   return (
@@ -21,5 +25,3 @@ const Dropdown: React.FC<DropdownProps> = ({ children, value, onChange }) => {
     </div>
   );
 };
-
-export default Dropdown;
