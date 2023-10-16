@@ -11,6 +11,7 @@ const en: I18nContent = {
     unread: "Unread",
     read: "Read",
     unseen: "Unseen",
+    poweredBy: "Powered by Knock",
   },
   locale: "en",
 };

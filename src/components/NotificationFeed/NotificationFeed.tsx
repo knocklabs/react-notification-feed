@@ -21,6 +21,7 @@ import "./styles.css";
 import useOnBottomScroll from "../../hooks/useOnBottomScroll";
 import useFeedSettings from "../../hooks/useFeedSettings";
 import { useTranslations } from "../../hooks/useTranslations";
+import { renderNodeOrFallback } from "../../utils";
 
 export type OnNotificationClick = (item: FeedItem) => void;
 export type RenderItem = ({ item }: RenderItemProps) => ReactNode;
@@ -31,7 +32,7 @@ export type RenderItemProps = {
 
 export interface NotificationFeedProps {
   EmptyComponent?: ReactNode;
-  header?: ReactElement<NotificationFeedHeaderProps>;
+  header?: ReactElement<any>;
   renderItem?: RenderItem;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
@@ -61,7 +62,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   onNotificationClick,
   onMarkAllAsReadClick,
   initialFilterStatus = FilterStatus.All,
-  header = NotificationFeedHeader,
+  header,
 }) => {
   const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
@@ -102,11 +103,14 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     <div
       className={`rnf-notification-feed rnf-notification-feed--${colorMode}`}
     >
-      {React.cloneElement(header as ReactElement<NotificationFeedHeaderProps>, {
-        onMarkAllAsReadClick,
-        filterStatus: status,
-        setFilterStatus: setStatus,
-      })}
+      {renderNodeOrFallback(
+        header,
+        <NotificationFeedHeader
+          onMarkAllAsReadClick={onMarkAllAsReadClick}
+          filterStatus={status}
+          setFilterStatus={setStatus}
+        />
+      )}
 
       <div className="rnf-notification-feed__container" ref={containerRef}>
         {networkStatus === NetworkStatus.loading && (

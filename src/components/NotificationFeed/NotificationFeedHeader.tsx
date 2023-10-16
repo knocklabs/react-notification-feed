@@ -9,7 +9,7 @@ import { MarkAsRead } from "./MarkAsRead";
 export type NotificationFeedHeaderProps = {
   filterStatus: FilterStatus;
   setFilterStatus: React.Dispatch<SetStateAction<FilterStatus>>;
-  onMarkAllAsReadClick: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
+  onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
 };
 
 const OrderedFilterStatuses = [

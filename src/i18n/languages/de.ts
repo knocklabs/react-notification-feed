@@ -6,11 +6,13 @@ const de: I18nContent = {
     markAllAsRead: "Alle als gelesen markieren",
     notifications: "Benachrichtigungen",
     emptyFeedTitle: "Noch keine Benachrichtigungen",
-    emptyFeedBody: "Wir werden dich benachrichtigen, sobald wir etwas Neues für dich haben.",
+    emptyFeedBody:
+      "Wir werden dich benachrichtigen, sobald wir etwas Neues für dich haben.",
     all: "Alle",
     unread: "Ungelesen",
     read: "Gelesen",
     unseen: "Ungesehen",
+    poweredBy: "Powered by Knock",
   },
   locale: "de",
 };
