@@ -32,8 +32,12 @@ export type RenderItemProps = {
 
 export interface NotificationFeedProps {
   EmptyComponent?: ReactNode;
+  /**
+   * @deprecated Use `renderHeader` instead to accept `NotificationFeedHeaderProps`
+   */
   header?: ReactElement<any>;
   renderItem?: RenderItem;
+  renderHeader?: (props: NotificationFeedHeaderProps) => ReactNode;
   onNotificationClick?: OnNotificationClick;
   onMarkAllAsReadClick?: (e: React.MouseEvent, unreadItems: FeedItem[]) => void;
   initialFilterStatus?: FilterStatus;
@@ -41,6 +45,10 @@ export interface NotificationFeedProps {
 
 const defaultRenderItem = (props: RenderItemProps) => (
   <NotificationCell key={props.item.id} {...props} />
+);
+
+const defaultRenderHeader = (props: NotificationFeedHeaderProps) => (
+  <NotificationFeedHeader {...props} />
 );
 
 const LoadingSpinner = ({ colorMode }: { colorMode: ColorMode }) => (
@@ -63,6 +71,7 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
   onMarkAllAsReadClick,
   initialFilterStatus = FilterStatus.All,
   header,
+  renderHeader = defaultRenderHeader,
 }) => {
   const [status, setStatus] = useState(initialFilterStatus);
   const { feedClient, useFeedStore, colorMode } = useKnockFeed();
@@ -103,14 +112,12 @@ export const NotificationFeed: React.FC<NotificationFeedProps> = ({
     <div
       className={`rnf-notification-feed rnf-notification-feed--${colorMode}`}
     >
-      {renderNodeOrFallback(
-        header,
-        <NotificationFeedHeader
-          onMarkAllAsReadClick={onMarkAllAsReadClick}
-          filterStatus={status}
-          setFilterStatus={setStatus}
-        />
-      )}
+      {header ||
+        renderHeader({
+          setFilterStatus: setStatus,
+          filterStatus: status,
+          onMarkAllAsReadClick,
+        })}
 
       <div className="rnf-notification-feed__container" ref={containerRef}>
         {networkStatus === NetworkStatus.loading && (
