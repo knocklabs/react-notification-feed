@@ -1,6 +1,6 @@
 {
   "name": "@knocklabs/react-notification-feed",
-  "version": "0.8.11",
+  "version": "0.8.12",
   "description": "A set of React components to render feeds powered by Knock",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -81,7 +81,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@knocklabs/client": "^0.8.10",
+    "@knocklabs/client": "^0.8.14",
     "@popperjs/core": "^2.9.2",
     "date-fns": "^2.24.0",
     "lodash.debounce": "^4.0.8",
