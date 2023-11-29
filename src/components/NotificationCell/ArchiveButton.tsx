@@ -34,6 +34,8 @@ const ArchiveButton: React.FC<ArchiveButtonProps> = ({ item }) => {
     <button
       ref={setTriggerRef}
       onClick={onClick}
+      type="button"
+      aria-label={t("archiveNotification")}
       className={`rnf-archive-notification-btn rnf-archive-notification-btn--${colorMode}`}
     >
       <CloseCircle />

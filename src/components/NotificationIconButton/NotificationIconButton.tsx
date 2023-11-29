@@ -20,6 +20,8 @@ export const NotificationIconButton = React.forwardRef<
   return (
     <button
       className={`rnf-notification-icon-button rnf-notification-icon-button--${colorMode}`}
+      role="button"
+      aria-label="Open notification feed"
       ref={ref}
       onClick={onClick}
     >

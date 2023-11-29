@@ -44,6 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       className={classNames}
       disabled={isLoading || isDisabled}
+      type="button"
     >
       {isLoading && <ButtonSpinner hasLabel={!!loadingText} />}
       {isLoading ? textToShowWhileLoading : children}
