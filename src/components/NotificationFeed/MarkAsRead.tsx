@@ -33,6 +33,7 @@ export const MarkAsRead: React.FC<MarkAsReadProps> = ({ onClick }) => {
       className={`rnf-mark-all-as-read rnf-mark-all-as-read--${colorMode}`}
       disabled={unreadCount === 0}
       onClick={onClickHandler}
+      type="button"
     >
       {t("markAllAsRead")}
       <CheckmarkCircle />
