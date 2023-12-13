@@ -34,7 +34,6 @@ export const MarkAsRead: React.FC<MarkAsReadProps> = ({ onClick }) => {
       disabled={unreadCount === 0}
       onClick={onClickHandler}
       type="button"
-      aria-label={t("markAllAsRead")}
     >
       {t("markAllAsRead")}
       <CheckmarkCircle />
