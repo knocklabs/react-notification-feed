@@ -43,7 +43,9 @@ export const NotificationCell = React.forwardRef<
 
     // Delay when we navigate, until we've actually issued our API call.
     setTimeout(() => {
-      window.location.assign(actionUrl);
+      if (actionUrl && actionUrl !== "") {
+        window.location.assign(actionUrl);
+      }
     }, 200);
   }, [item]);
 
