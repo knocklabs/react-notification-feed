@@ -228,3 +228,9 @@
 .rnf-tooltip--dark {
   background-color: #565a61;
 }
+
+@media screen and (max-width: 400px) {
+  .rnf-archive-notification-btn {
+    opacity: 1;
+  }
+}

@@ -33,6 +33,7 @@ const ArchiveButton: React.FC<ArchiveButtonProps> = ({ item }) => {
   return (
     <button
       ref={setTriggerRef}
+      aria-label={t("archiveNotification")}
       onClick={onClick}
       type="button"
       aria-label={t("archiveNotification")}
