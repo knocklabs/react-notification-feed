@@ -229,7 +229,7 @@
   background-color: #565a61;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (hover: none) {
   .rnf-archive-notification-btn {
     opacity: 1;
   }
