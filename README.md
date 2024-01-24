@@ -1,5 +1,7 @@
 # React notification feed
 
+**Note: This package has been archived. If you're using `@knocklabs/react-notification-feed`, check out our [migration guide](https://docs.knock.app/in-app-ui/react/migrating-from-react-notification-feed) to learn how to use our [new React library](https://github.com/knocklabs/javascript/tree/main/packages/react).**
+
 A set of components for integrating [Knock](https://knock.app) in-app notifications into a React application.
 
 [See a live demo](https://knock-in-app-notifications-react.vercel.app/)
